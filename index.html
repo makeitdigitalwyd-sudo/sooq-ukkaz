@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>العربي — استمارة التسجيل | جامعة دار الهدى الإسلامية</title>
+  <title>العربي — استمارة التسجيل ولوحة الإدارة | جامعة دار الهدى الإسلامية</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -101,8 +101,8 @@
 <body class="min-h-screen antialiased selection:bg-amberGold-500 selection:text-mahogany-950">
 
   <!-- Top Navigation Bar -->
-  <header class="no-print sticky top-0 z-30 border-b border-amberGold-400/20 bg-mahogany-950/85 backdrop-blur-md">
-    <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3 sm:px-6">
+  <header class="no-print sticky top-0 z-30 border-b border-amberGold-400/20 bg-mahogany-950/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
       <div class="flex items-center gap-3">
         <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-amberGold-400/40 bg-mahogany-800 text-amberGold-300 font-amiri text-xl font-bold">
           ع
@@ -115,65 +115,65 @@
 
       <nav class="flex items-center gap-1.5 sm:gap-2">
         <button id="tabRegisterBtn" type="button" class="rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950">
-          استمارة التسجيل
+          التسجيل
         </button>
-        <button id="tabOrganizerBtn" type="button" class="rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25">
-          رمز QR والسجل
+        <button id="tabAdminBtn" type="button" class="rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25">
+          لوحة الإدارة
         </button>
       </nav>
     </div>
   </header>
 
-  <main class="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-10">
+  <main class="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
 
-    <!-- Hero Banner (Poster-Inspired) -->
-    <section class="no-print relative overflow-hidden rounded-2xl border border-amberGold-400/35 bg-mahogany-900 p-6 sm:p-8 mb-6 shadow-2xl">
-      <div class="arabesque-border pointer-events-none absolute inset-0 opacity-45"></div>
-      <div class="relative z-10 text-center">
-        <p class="text-xs font-medium tracking-wide text-amberGold-300/90 sm:text-sm">
-          قسم اللغة العربية وآدابها • كلية اللغات والآداب
-        </p>
-        <p class="mt-1 text-xs text-amberGold-200/75">
-          جامعة دار الهدى الإسلامية — DARUL HUDA ISLAMIC UNIVERSITY
-        </p>
+    <!-- VIEW 1: PUBLIC REGISTRATION FORM -->
+    <section id="registerView" class="space-y-6">
+      <!-- Hero Banner -->
+      <div class="no-print relative overflow-hidden rounded-2xl border border-amberGold-400/35 bg-mahogany-900 p-6 sm:p-8 shadow-2xl">
+        <div class="arabesque-border pointer-events-none absolute inset-0 opacity-45"></div>
+        <div class="relative z-10 text-center">
+          <p class="text-xs font-medium tracking-wide text-amberGold-300/90 sm:text-sm">
+            قسم اللغة العربية وآدابها • كلية اللغات والآداب
+          </p>
+          <p class="mt-1 text-xs text-amberGold-200/75">
+            جامعة دار الهدى الإسلامية — DARUL HUDA ISLAMIC UNIVERSITY
+          </p>
 
-        <h1 class="mt-4 font-amiri text-5xl font-bold leading-tight gold-gradient-text sm:text-6xl">
-          العربي
-        </h1>
-        <p class="mt-2 text-base font-semibold text-amberGold-200 sm:text-lg">
-          مسابقة لاكتشاف البطل في اللغة العربية
-        </p>
+          <h1 class="mt-4 font-amiri text-5xl font-bold leading-tight gold-gradient-text sm:text-6xl">
+            العربي
+          </h1>
+          <p class="mt-2 text-base font-semibold text-amberGold-200 sm:text-lg">
+            مسابقة لاكتشاف البطل في اللغة العربية
+          </p>
 
-        <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm">
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-amberGold-400/40 bg-mahogany-950/75 px-3.5 py-1.5 font-semibold text-amberGold-300">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            ١٩ ديسمبر ٢٠٢٦
-          </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-amberGold-400/40 bg-mahogany-950/75 px-3.5 py-1.5 font-semibold text-amberGold-300">
-            رسوم التسجيل: 50 روبية
-          </span>
-        </div>
-
-        <!-- Prizes Strip -->
-        <div class="mt-5 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto">
-          <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
-            <p class="text-[11px] text-amberGold-200/70">المركز الأول</p>
-            <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 4444</p>
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-amberGold-400/40 bg-mahogany-950/75 px-3.5 py-1.5 font-semibold text-amberGold-300">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              ١٩ ديسمبر ٢٠٢٦
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-amberGold-400/40 bg-mahogany-950/75 px-3.5 py-1.5 font-semibold text-amberGold-300">
+              رسوم التسجيل: 50 روبية
+            </span>
           </div>
-          <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
-            <p class="text-[11px] text-amberGold-200/70">المركز الثاني</p>
-            <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 3333</p>
-          </div>
-          <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
-            <p class="text-[11px] text-amberGold-200/70">المركز الثالث</p>
-            <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 2222</p>
+
+          <div class="mt-5 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto">
+            <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
+              <p class="text-[11px] text-amberGold-200/70">المركز الأول</p>
+              <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 4444</p>
+            </div>
+            <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
+              <p class="text-[11px] text-amberGold-200/70">المركز الثاني</p>
+              <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 3333</p>
+            </div>
+            <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
+              <p class="text-[11px] text-amberGold-200/70">المركز الثالث</p>
+              <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 2222</p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- VIEW 1: REGISTRATION FORM -->
-    <section id="registerView" class="space-y-6">
+      <!-- Registration Form -->
       <form id="registrationForm" novalidate class="glass-card rounded-2xl p-5 sm:p-8 space-y-6">
         <div class="border-b border-amberGold-400/20 pb-4">
           <h2 class="text-lg font-bold text-amberGold-200 sm:text-xl">بيانات المشارك</h2>
@@ -245,7 +245,7 @@
                 الدفع عبر UPI / GPay / PhonePe
               </h3>
               <p class="text-xs leading-relaxed text-amberGold-200/75 sm:text-sm">
-                يرجى تحويل مبلغ <strong class="text-amberGold-300">50 روبية</strong> إلى الرقم التالي، ثم التقاط لقطة شاشة (Screenshot) لإيصال الدفع وإرفاقها أدناه:
+                يرجى تحويل مبلغ <strong class="text-amberGold-300">50 روبية</strong> عبر مسح رمز QR أو التحويل للرقم/المعرف التالي، ثم إرفاق لقطة شاشة لإيصال الدفع:
               </p>
 
               <div class="flex flex-wrap items-center gap-2 pt-1">
@@ -312,7 +312,7 @@
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
               </div>
               <p class="text-sm font-semibold text-amberGold-200">اضغط لاختيار صورة الإيصال أو اسحبها هنا</p>
-              <p class="text-xs text-amberGold-200/60">PNG, JPG, WEBP — الحد الأقصى الموصى به 5MB</p>
+              <p class="text-xs text-amberGold-200/60">يتم ضغط الصورة تلقائياً لتسريع الإرسال (PNG, JPG, WEBP)</p>
             </div>
 
             <div id="previewContainer" class="hidden w-full space-y-3">
@@ -331,15 +331,16 @@
         <!-- Submit Button -->
         <div class="pt-2">
           <button
+            id="submitRegBtn"
             type="submit"
-            class="w-full rounded-xl bg-gradient-to-l from-amberGold-500 to-amberGold-400 px-6 py-3.5 text-base font-bold text-mahogany-950 shadow-lg shadow-amberGold-500/20 transition hover:brightness-110 active:scale-[0.99]"
+            class="w-full rounded-xl bg-gradient-to-l from-amberGold-500 to-amberGold-400 px-6 py-3.5 text-base font-bold text-mahogany-950 shadow-lg shadow-amberGold-500/20 transition hover:brightness-110 active:scale-[0.99] disabled:opacity-60"
           >
             تأكيد وإرسال التسجيل
           </button>
         </div>
       </form>
 
-      <!-- Confirmation Ticket (Hidden until submitted) -->
+      <!-- Confirmation Ticket -->
       <div id="confirmationCard" class="hidden glass-card print-card rounded-2xl p-6 sm:p-8 text-center space-y-5">
         <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40">
           <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
@@ -383,411 +384,776 @@
       </div>
     </section>
 
-    <!-- VIEW 2: ORGANIZER QR GENERATOR & LOG -->
-    <section id="organizerView" class="hidden space-y-6">
-      <!-- QR Code Generator Card -->
-      <div class="glass-card rounded-2xl p-5 sm:p-8 space-y-5">
-        <div class="border-b border-amberGold-400/20 pb-4">
-          <h2 class="text-lg font-bold text-amberGold-200 sm:text-xl">إنشاء رمز QR لرابط الاستمارة</h2>
-          <p class="mt-1 text-xs text-amberGold-200/70 sm:text-sm">
-            بعد رفع هذه الصفحة على استضافة (مثل Netlify أو GitHub Pages أو Google Sites)، الصق الرابط هنا لتوليد رمز QR أنيق جاهز للطباعة والنشر.
-          </p>
+    <!-- VIEW 2: ADMIN DASHBOARD (LOGIN + LIVE PANEL) -->
+    <section id="adminView" class="hidden space-y-6">
+
+      <!-- Admin Login Card -->
+      <div id="adminLoginCard" class="mx-auto max-w-md glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+        <div class="text-center space-y-1">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-amberGold-400/40 bg-mahogany-800 text-amberGold-300">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h2 class="text-xl font-bold text-amberGold-200">تسجيل دخول الإدارة</h2>
+          <p class="text-xs text-amberGold-200/70">لوحة متابعة المسجلين وتحديثات الدفع المباشرة</p>
         </div>
 
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center">
-          <div class="space-y-4">
-            <div>
-              <label for="formUrlInput" class="mb-2 block text-sm font-semibold text-amberGold-200">
-                رابط التسجيل المنشور (URL)
-              </label>
+        <form id="adminLoginForm" class="space-y-4">
+          <div>
+            <label for="adminEmail" class="mb-1.5 block text-xs font-semibold text-amberGold-200">البريد الإلكتروني</label>
+            <input
+              id="adminEmail"
+              type="text"
+              dir="ltr"
+              required
+              placeholder="arabi@sooq"
+              class="input-field w-full rounded-xl px-4 py-2.5 text-sm"
+            />
+          </div>
+          <div>
+            <label for="adminPassword" class="mb-1.5 block text-xs font-semibold text-amberGold-200">كلمة المرور</label>
+            <input
+              id="adminPassword"
+              type="password"
+              dir="ltr"
+              required
+              placeholder="••••••••••"
+              class="input-field w-full rounded-xl px-4 py-2.5 text-sm"
+            />
+          </div>
+          <p id="loginErrorMsg" class="hidden text-xs text-red-400 text-center"></p>
+          <button
+            id="loginSubmitBtn"
+            type="submit"
+            class="w-full rounded-xl bg-amberGold-500 py-3 text-sm font-bold text-mahogany-950 transition hover:bg-amberGold-400"
+          >
+            دخول إلى لوحة الإدارة
+          </button>
+        </form>
+
+        <p id="firebaseStatusNotice" class="rounded-xl border border-amberGold-400/20 bg-mahogany-950/60 p-3 text-[11px] leading-relaxed text-amberGold-200/70 text-center">
+          جارٍ التحقق من اتصال Firebase...
+        </p>
+      </div>
+
+      <!-- Admin Dashboard Content (Hidden until authenticated) -->
+      <div id="adminDashboard" class="hidden space-y-6">
+
+        <!-- Dashboard Header Bar -->
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <span id="liveIndicator" class="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-3 py-1 text-xs font-bold text-emerald-300">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              متصل مباشر • Live
+            </span>
+            <span id="adminUserLabel" class="text-xs text-amberGold-200/75 font-mono" dir="ltr"></span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="toggleSoundBtn" type="button" class="rounded-xl border border-amberGold-400/30 bg-mahogany-800 px-3 py-1.5 text-xs font-semibold text-amberGold-200 hover:bg-mahogany-700">
+              تنبيه الصوت: مفعّل
+            </button>
+            <button id="exportCsvBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-amberGold-500/20 px-3.5 py-1.5 text-xs font-semibold text-amberGold-200 hover:bg-amberGold-500 hover:text-mahogany-950">
+              تصدير CSV
+            </button>
+            <button id="adminLogoutBtn" type="button" class="rounded-xl border border-red-400/35 bg-red-500/15 px-3.5 py-1.5 text-xs font-semibold text-red-300 hover:bg-red-500/30">
+              تسجيل الخروج
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Summary Cards -->
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          <div class="glass-card rounded-2xl p-4">
+            <p class="text-xs text-amberGold-200/65">إجمالي المسجلين</p>
+            <p id="kpiTotal" class="mt-1 text-2xl font-bold text-amberGold-200">0</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4">
+            <p class="text-xs text-amberGold-200/65">قيد المراجعة</p>
+            <p id="kpiPending" class="mt-1 text-2xl font-bold text-amberGold-400">0</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4">
+            <p class="text-xs text-amberGold-200/65">مؤكد الدفع</p>
+            <p id="kpiApproved" class="mt-1 text-2xl font-bold text-emerald-400">0</p>
+          </div>
+          <div class="glass-card rounded-2xl p-4">
+            <p class="text-xs text-amberGold-200/65">إجمالي الرسوم المؤكدة</p>
+            <p id="kpiRevenue" class="mt-1 text-2xl font-bold text-amberGold-300" dir="ltr">₹ 0</p>
+          </div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="ابحث بالاسم أو الكلية أو رقم التسجيل..."
+            class="input-field w-full sm:max-w-sm rounded-xl px-4 py-2 text-sm"
+          />
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button type="button" data-filter="all" class="filter-btn rounded-lg px-3 py-1.5 text-xs font-semibold bg-amberGold-500 text-mahogany-950">الكل</button>
+            <button type="button" data-filter="pending" class="filter-btn rounded-lg px-3 py-1.5 text-xs font-semibold border border-amberGold-400/25 text-amberGold-200/80 hover:bg-mahogany-800">قيد المراجعة</button>
+            <button type="button" data-filter="approved" class="filter-btn rounded-lg px-3 py-1.5 text-xs font-semibold border border-amberGold-400/25 text-amberGold-200/80 hover:bg-mahogany-800">مؤكد</button>
+            <button type="button" data-filter="rejected" class="filter-btn rounded-lg px-3 py-1.5 text-xs font-semibold border border-amberGold-400/25 text-amberGold-200/80 hover:bg-mahogany-800">مرفوض</button>
+          </div>
+        </div>
+
+        <!-- Registrations List -->
+        <div id="registrationsList" class="space-y-3">
+          <p class="py-8 text-center text-sm text-amberGold-200/55">لا توجد تسجيلات بعد.</p>
+        </div>
+
+        <!-- QR Code Generator Card -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+          <div class="border-b border-amberGold-400/20 pb-3">
+            <h3 class="text-base font-bold text-amberGold-200">مولّد رمز QR للنشر</h3>
+          </div>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 items-center">
+            <div class="space-y-3">
+              <label for="formUrlInput" class="block text-xs font-semibold text-amberGold-200">رابط صفحة التسجيل</label>
               <input
                 id="formUrlInput"
                 type="url"
                 dir="ltr"
-                placeholder="https://your-site.netlify.app/registration"
-                class="input-field w-full rounded-xl px-4 py-3 text-sm"
+                value="https://alarabi-ashen.vercel.app/"
+                class="input-field w-full rounded-xl px-4 py-2.5 text-sm"
               />
+              <div class="flex flex-wrap gap-2">
+                <button id="generateQrBtn" type="button" class="rounded-xl bg-amberGold-500 px-4 py-2 text-xs font-bold text-mahogany-950 hover:bg-amberGold-400">تحديث الرمز</button>
+                <button id="downloadQrBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2 text-xs font-semibold text-amberGold-200 hover:bg-mahogany-700">تحميل PNG</button>
+              </div>
             </div>
-
-            <div class="flex flex-wrap gap-2.5">
-              <button id="generateQrBtn" type="button" class="rounded-xl bg-amberGold-500 px-5 py-2.5 text-sm font-bold text-mahogany-950 hover:bg-amberGold-400">
-                توليد رمز QR
-              </button>
-              <button id="downloadQrBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2.5 text-sm font-semibold text-amberGold-200 hover:bg-mahogany-700">
-                تحميل صورة QR (PNG)
-              </button>
+            <div class="flex flex-col items-center justify-center rounded-2xl border border-amberGold-400/35 bg-white p-4 text-center">
+              <canvas id="shareQrCanvas" class="h-40 w-40"></canvas>
+              <p id="qrUrlPreview" class="mt-2 max-w-[220px] truncate text-[11px] font-mono text-gray-500" dir="ltr"></p>
             </div>
           </div>
-
-          <div class="flex flex-col items-center justify-center rounded-2xl border border-amberGold-400/35 bg-white p-6 text-center shadow-xl">
-            <p class="font-amiri text-2xl font-bold text-mahogany-900">العربي</p>
-            <p class="text-[11px] font-semibold text-amberGold-600 mb-3">امسح الرمز للتسجيل في المسابقة</p>
-            <canvas id="shareQrCanvas" class="h-48 w-48"></canvas>
-            <p id="qrUrlPreview" class="mt-3 max-w-[220px] truncate text-[11px] font-mono text-gray-500" dir="ltr">
-              أدخل الرابط لتحديث الرمز
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Saved Registrations List -->
-      <div class="glass-card rounded-2xl p-5 sm:p-8 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amberGold-400/20 pb-4">
-          <div>
-            <h2 class="text-lg font-bold text-amberGold-200">سجل المسجلين (محلي على هذا المتصفح)</h2>
-            <p class="text-xs text-amberGold-200/65">لحفظ البيانات عبر الإنترنت من جميع الأجهزة، اربط زر الإرسال بخدمة مثل Formspree أو Google Apps Script.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="exportCsvBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-amberGold-500/20 px-3.5 py-2 text-xs font-semibold text-amberGold-200 hover:bg-amberGold-500 hover:text-mahogany-950">
-              تصدير CSV
-            </button>
-            <button id="clearLogBtn" type="button" class="rounded-xl border border-red-400/35 bg-red-500/15 px-3.5 py-2 text-xs font-semibold text-red-300 hover:bg-red-500/30">
-              مسح السجل
-            </button>
-          </div>
         </div>
 
-        <div id="registrationsList" class="space-y-2.5 text-sm">
-          <p class="py-6 text-center text-xs text-amberGold-200/55">لا توجد تسجيلات محفوظة بعد.</p>
-        </div>
       </div>
     </section>
 
-    <!-- Footer Contact -->
+    <!-- Footer -->
     <footer class="no-print mt-8 border-t border-amberGold-400/15 pt-5 text-center text-xs text-amberGold-200/65 space-y-1">
       <p>للمزيد من الاستفسارات: <span class="font-mono font-semibold text-amberGold-300" dir="ltr">8590409367</span> • <span dir="ltr">@arabic_language_literature</span></p>
       <p>قسم اللغة العربية وآدابها — جامعة دار الهدى الإسلامية</p>
     </footer>
   </main>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="no-print pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2.5 text-xs font-semibold text-amberGold-200 opacity-0 shadow-2xl transition-all duration-200">
-    تم النسخ
+  <!-- Screenshot Viewer Modal -->
+  <div id="screenshotModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+    <div class="relative max-w-lg w-full glass-card rounded-2xl p-4 sm:p-5 space-y-3">
+      <div class="flex items-center justify-between border-b border-amberGold-400/20 pb-2">
+        <p id="modalParticipantTitle" class="text-sm font-bold text-amberGold-200">إيصال الدفع</p>
+        <button id="closeModalBtn" type="button" class="rounded-lg border border-amberGold-400/30 px-2.5 py-1 text-xs text-amberGold-200 hover:bg-mahogany-800">إغلاق</button>
+      </div>
+      <img id="modalScreenshotImg" alt="إيصال الدفع" class="mx-auto max-h-[70vh] w-auto rounded-xl object-contain" />
+    </div>
   </div>
 
-  <script>
-    (function () {
-      const STORAGE_KEY = 'al_arabi_registrations_v1';
-      let uploadedFileData = null;
+  <!-- Toast Notification -->
+  <div id="toast" class="no-print pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2.5 text-xs font-semibold text-amberGold-200 opacity-0 shadow-2xl transition-all duration-200">
+    تم
+  </div>
 
-      // DOM elements
-      const tabRegisterBtn = document.getElementById('tabRegisterBtn');
-      const tabOrganizerBtn = document.getElementById('tabOrganizerBtn');
-      const registerView = document.getElementById('registerView');
-      const organizerView = document.getElementById('organizerView');
+  <!-- Firebase Modular SDK + App Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    import {
+      getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-      const form = document.getElementById('registrationForm');
-      const participantName = document.getElementById('participantName');
-      const participantAge = document.getElementById('participantAge');
-      const collegeName = document.getElementById('collegeName');
-      const screenshotInput = document.getElementById('screenshotInput');
-      const uploadPrompt = document.getElementById('uploadPrompt');
-      const previewContainer = document.getElementById('previewContainer');
-      const screenshotPreview = document.getElementById('screenshotPreview');
-      const fileNameLabel = document.getElementById('fileNameLabel');
-      const removeFileBtn = document.getElementById('removeFileBtn');
+    // =========================================================================
+    // 1) PASTE YOUR FIREBASE CONFIG HERE FROM FIREBASE CONSOLE
+    // =========================================================================
+    const FIREBASE_CONFIG = {
+      apiKey: "",
+      authDomain: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: "",
+      appId: ""
+    };
 
-      const errName = document.getElementById('errName');
-      const errAge = document.getElementById('errAge');
-      const errCollege = document.getElementById('errCollege');
-      const errScreenshot = document.getElementById('errScreenshot');
+    const isFirebaseConfigured = Boolean(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.projectId);
+    const LOCAL_STORAGE_KEY = 'al_arabi_registrations_v2';
 
-      const confirmationCard = document.getElementById('confirmationCard');
-      const ticketId = document.getElementById('ticketId');
-      const ticketName = document.getElementById('ticketName');
-      const ticketAge = document.getElementById('ticketAge');
-      const ticketCollege = document.getElementById('ticketCollege');
-      const printTicketBtn = document.getElementById('printTicketBtn');
-      const newRegistrationBtn = document.getElementById('newRegistrationBtn');
-      const copyPhoneBtn = document.getElementById('copyPhoneBtn');
-      const copyUpiBtn = document.getElementById('copyUpiBtn');
+    let db = null;
+    let auth = null;
+    let unsubscribeSnapshot = null;
+    let allRegistrations = [];
+    let currentFilter = 'all';
+    let soundEnabled = true;
+    let initialLoadDone = false;
 
-      const formUrlInput = document.getElementById('formUrlInput');
-      const generateQrBtn = document.getElementById('generateQrBtn');
-      const downloadQrBtn = document.getElementById('downloadQrBtn');
-      const shareQrCanvas = document.getElementById('shareQrCanvas');
-      const qrUrlPreview = document.getElementById('qrUrlPreview');
-      const registrationsList = document.getElementById('registrationsList');
-      const exportCsvBtn = document.getElementById('exportCsvBtn');
-      const clearLogBtn = document.getElementById('clearLogBtn');
-      const toast = document.getElementById('toast');
+    if (isFirebaseConfigured) {
+      const app = initializeApp(FIREBASE_CONFIG);
+      db = getFirestore(app);
+      auth = getAuth(app);
+    }
 
-      function showToast(msg) {
-        toast.textContent = msg;
-        toast.classList.remove('opacity-0', 'translate-y-4');
-        toast.classList.add('opacity-100', 'translate-y-0');
-        setTimeout(() => {
-          toast.classList.add('opacity-0', 'translate-y-4');
-          toast.classList.remove('opacity-100', 'translate-y-0');
-        }, 2500);
+    // DOM Elements
+    const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+    const tabAdminBtn = document.getElementById('tabAdminBtn');
+    const registerView = document.getElementById('registerView');
+    const adminView = document.getElementById('adminView');
+
+    const form = document.getElementById('registrationForm');
+    const participantName = document.getElementById('participantName');
+    const participantAge = document.getElementById('participantAge');
+    const collegeName = document.getElementById('collegeName');
+    const screenshotInput = document.getElementById('screenshotInput');
+    const uploadPrompt = document.getElementById('uploadPrompt');
+    const previewContainer = document.getElementById('previewContainer');
+    const screenshotPreview = document.getElementById('screenshotPreview');
+    const fileNameLabel = document.getElementById('fileNameLabel');
+    const removeFileBtn = document.getElementById('removeFileBtn');
+    const submitRegBtn = document.getElementById('submitRegBtn');
+
+    const errName = document.getElementById('errName');
+    const errAge = document.getElementById('errAge');
+    const errCollege = document.getElementById('errCollege');
+    const errScreenshot = document.getElementById('errScreenshot');
+
+    const confirmationCard = document.getElementById('confirmationCard');
+    const ticketId = document.getElementById('ticketId');
+    const ticketName = document.getElementById('ticketName');
+    const ticketAge = document.getElementById('ticketAge');
+    const ticketCollege = document.getElementById('ticketCollege');
+    const printTicketBtn = document.getElementById('printTicketBtn');
+    const newRegistrationBtn = document.getElementById('newRegistrationBtn');
+    const copyPhoneBtn = document.getElementById('copyPhoneBtn');
+    const copyUpiBtn = document.getElementById('copyUpiBtn');
+
+    const adminLoginCard = document.getElementById('adminLoginCard');
+    const adminDashboard = document.getElementById('adminDashboard');
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPassword = document.getElementById('adminPassword');
+    const loginErrorMsg = document.getElementById('loginErrorMsg');
+    const firebaseStatusNotice = document.getElementById('firebaseStatusNotice');
+    const liveIndicator = document.getElementById('liveIndicator');
+    const adminUserLabel = document.getElementById('adminUserLabel');
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+    const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+
+    const kpiTotal = document.getElementById('kpiTotal');
+    const kpiPending = document.getElementById('kpiPending');
+    const kpiApproved = document.getElementById('kpiApproved');
+    const kpiRevenue = document.getElementById('kpiRevenue');
+    const searchInput = document.getElementById('searchInput');
+    const registrationsList = document.getElementById('registrationsList');
+    const exportCsvBtn = document.getElementById('exportCsvBtn');
+
+    const formUrlInput = document.getElementById('formUrlInput');
+    const generateQrBtn = document.getElementById('generateQrBtn');
+    const downloadQrBtn = document.getElementById('downloadQrBtn');
+    const shareQrCanvas = document.getElementById('shareQrCanvas');
+    const qrUrlPreview = document.getElementById('qrUrlPreview');
+
+    const screenshotModal = document.getElementById('screenshotModal');
+    const modalParticipantTitle = document.getElementById('modalParticipantTitle');
+    const modalScreenshotImg = document.getElementById('modalScreenshotImg');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const toast = document.getElementById('toast');
+
+    let compressedImageDataUrl = null;
+    let uploadedFileName = '';
+
+    // Toast
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2800);
+    }
+
+    // Subtle chime using Web Audio API for live new-registration alerts
+    function playNotificationChime() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(660, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.14);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.36);
+      } catch (e) {}
+    }
+
+    toggleSoundBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      toggleSoundBtn.textContent = soundEnabled ? 'تنبيه الصوت: مفعّل' : 'تنبيه الصوت: صامت';
+    });
+
+    // Tab switching
+    function switchTab(tab) {
+      if (tab === 'register') {
+        registerView.classList.remove('hidden');
+        adminView.classList.add('hidden');
+        tabRegisterBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950';
+        tabAdminBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25';
+      } else {
+        registerView.classList.add('hidden');
+        adminView.classList.remove('hidden');
+        tabAdminBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950';
+        tabRegisterBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25';
+        renderShareQr(formUrlInput.value);
       }
+    }
 
-      // Render Shareable Form QR
-      function renderShareQr(url) {
-        const target = (url || '').trim() || 'https://darulhuda.example.com/al-arabi-registration';
-        if (window.QRCode && shareQrCanvas) {
-          window.QRCode.toCanvas(shareQrCanvas, target, {
-            width: 192,
-            margin: 1,
-            color: { dark: '#1C0A04', light: '#FFFFFF' }
-          });
-          qrUrlPreview.textContent = (url || '').trim() ? target : 'مثال توضيحي — أدخل رابطك أعلاه';
-        }
+    tabRegisterBtn.addEventListener('click', () => switchTab('register'));
+    tabAdminBtn.addEventListener('click', () => switchTab('admin'));
+
+    // Copy helpers
+    function copyText(val, label) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(val).then(() => showToast('تم نسخ ' + label + ': ' + val)).catch(() => fallbackCopy(val, label));
+      } else {
+        fallbackCopy(val, label);
       }
+    }
 
-      // Tabs
-      function switchTab(tab) {
-        if (tab === 'register') {
-          registerView.classList.remove('hidden');
-          organizerView.classList.add('hidden');
-          tabRegisterBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950';
-          tabOrganizerBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25';
-        } else {
-          registerView.classList.add('hidden');
-          organizerView.classList.remove('hidden');
-          tabOrganizerBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950';
-          tabRegisterBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25';
-          renderRegistrations();
-        }
+    function fallbackCopy(text, label) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('تم نسخ ' + (label || '') + ': ' + text);
+      } catch (e) {
+        showToast(text);
       }
+      document.body.removeChild(ta);
+    }
 
-      tabRegisterBtn.addEventListener('click', () => switchTab('register'));
-      tabOrganizerBtn.addEventListener('click', () => switchTab('organizer'));
+    copyPhoneBtn.addEventListener('click', () => copyText('+91 90725 84470', 'الرقم'));
+    copyUpiBtn.addEventListener('click', () => copyText('althafansar55@okaxis', 'UPI ID'));
 
-      function copyText(val, label) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(val).then(() => {
-            showToast('تم نسخ ' + label + ': ' + val);
-          }).catch(() => fallbackCopy(val, label));
-        } else {
-          fallbackCopy(val, label);
-        }
-      }
-
-      // Copy phone number & UPI ID
-      copyPhoneBtn.addEventListener('click', () => copyText('+91 90725 84470', 'الرقم'));
-      if (copyUpiBtn) {
-        copyUpiBtn.addEventListener('click', () => copyText('althafansar55@okaxis', 'UPI ID'));
-      }
-
-      function fallbackCopy(text, label) {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        try {
-          document.execCommand('copy');
-          showToast('تم نسخ ' + (label || '') + ': ' + text);
-        } catch (e) {
-          showToast(text);
-        }
-        document.body.removeChild(ta);
-      }
-
-      // File upload preview
-      screenshotInput.addEventListener('change', (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
+    // Compress uploaded screenshot to keep under Firestore 1MB limit
+    function compressImage(file, maxWidth = 900, quality = 0.72) {
+      return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (ev) => {
-          uploadedFileData = {
-            name: file.name,
-            size: Math.round(file.size / 1024) + ' KB',
-            dataUrl: ev.target.result
+          const img = new Image();
+          img.onload = () => {
+            const scale = Math.min(1, maxWidth / img.width);
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.round(img.width * scale);
+            canvas.height = Math.round(img.height * scale);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
           };
-          screenshotPreview.src = uploadedFileData.dataUrl;
-          fileNameLabel.textContent = `${uploadedFileData.name} (${uploadedFileData.size})`;
-          uploadPrompt.classList.add('hidden');
-          previewContainer.classList.remove('hidden');
-          errScreenshot.classList.add('hidden');
+          img.onerror = reject;
+          img.src = ev.target.result;
         };
+        reader.onerror = reject;
         reader.readAsDataURL(file);
       });
+    }
 
-      removeFileBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        uploadedFileData = null;
-        screenshotInput.value = '';
-        screenshotPreview.src = '';
-        previewContainer.classList.add('hidden');
-        uploadPrompt.classList.remove('hidden');
-      });
+    screenshotInput.addEventListener('change', async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      try {
+        uploadedFileName = file.name;
+        compressedImageDataUrl = await compressImage(file);
+        screenshotPreview.src = compressedImageDataUrl;
+        const approxKb = Math.round((compressedImageDataUrl.length * 3) / 4 / 1024);
+        fileNameLabel.textContent = `${file.name} (~${approxKb} KB)`;
+        uploadPrompt.classList.add('hidden');
+        previewContainer.classList.remove('hidden');
+        errScreenshot.classList.add('hidden');
+      } catch (err) {
+        showToast('تعذر قراءة الصورة، جرب صورة أخرى');
+      }
+    });
 
-      // Local storage helpers
-      function getRegistrations() {
-        try {
-          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        } catch (e) {
-          return [];
-        }
+    removeFileBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      compressedImageDataUrl = null;
+      uploadedFileName = '';
+      screenshotInput.value = '';
+      screenshotPreview.src = '';
+      previewContainer.classList.add('hidden');
+      uploadPrompt.classList.remove('hidden');
+    });
+
+    // Local fallback storage
+    function getLocalRegistrations() {
+      try {
+        return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLocalRegistration(record) {
+      try {
+        const list = getLocalRegistrations();
+        list.unshift(record);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    // Registration Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      const nameVal = participantName.value.trim();
+      const ageVal = parseInt(participantAge.value, 10);
+      const collegeVal = collegeName.value.trim();
+
+      if (!nameVal) { errName.classList.remove('hidden'); valid = false; } else { errName.classList.add('hidden'); }
+      if (isNaN(ageVal) || ageVal < 10 || ageVal > 60) { errAge.classList.remove('hidden'); valid = false; } else { errAge.classList.add('hidden'); }
+      if (!collegeVal) { errCollege.classList.remove('hidden'); valid = false; } else { errCollege.classList.add('hidden'); }
+      if (!compressedImageDataUrl) { errScreenshot.classList.remove('hidden'); valid = false; } else { errScreenshot.classList.add('hidden'); }
+
+      if (!valid) {
+        showToast('يرجى إكمال جميع الحقول المطلوبة');
+        return;
       }
 
-      function saveRegistration(entry) {
-        try {
-          const list = getRegistrations();
-          list.unshift(entry);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-        } catch (e) {
-          // Ignore storage quota errors gracefully
-        }
-      }
+      submitRegBtn.disabled = true;
+      submitRegBtn.textContent = 'جارٍ إرسال التسجيل...';
 
-      // Form validation & submission
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let valid = true;
+      const regCode = 'ARB-' + Math.floor(1000 + Math.random() * 9000);
+      const record = {
+        regCode,
+        name: nameVal,
+        age: ageVal,
+        college: collegeVal,
+        fee: 50,
+        status: 'pending',
+        screenshotName: uploadedFileName || 'receipt.jpg',
+        screenshotDataUrl: compressedImageDataUrl,
+        createdAtMs: Date.now(),
+        submittedAt: new Date().toLocaleString('ar-IN')
+      };
 
-        const nameVal = participantName.value.trim();
-        const ageVal = parseInt(participantAge.value, 10);
-        const collegeVal = collegeName.value.trim();
-
-        if (!nameVal) {
-          errName.classList.remove('hidden');
-          valid = false;
+      try {
+        if (isFirebaseConfigured && db) {
+          await addDoc(collection(db, 'registrations'), record);
         } else {
-          errName.classList.add('hidden');
+          record.id = regCode;
+          saveLocalRegistration(record);
         }
 
-        if (isNaN(ageVal) || ageVal < 10 || ageVal > 60) {
-          errAge.classList.remove('hidden');
-          valid = false;
-        } else {
-          errAge.classList.add('hidden');
-        }
-
-        if (!collegeVal) {
-          errCollege.classList.remove('hidden');
-          valid = false;
-        } else {
-          errCollege.classList.add('hidden');
-        }
-
-        if (!uploadedFileData) {
-          errScreenshot.classList.remove('hidden');
-          valid = false;
-        } else {
-          errScreenshot.classList.add('hidden');
-        }
-
-        if (!valid) {
-          showToast('يرجى إكمال جميع الحقول المطلوبة');
-          return;
-        }
-
-        const id = 'ARB-' + Math.floor(1000 + Math.random() * 9000);
-        const record = {
-          id,
-          name: nameVal,
-          age: ageVal,
-          college: collegeVal,
-          fee: '50 INR',
-          screenshotName: uploadedFileData.name,
-          submittedAt: new Date().toLocaleString('ar-IN')
-        };
-
-        saveRegistration(record);
-
-        ticketId.textContent = record.id;
-        ticketName.textContent = record.name;
-        ticketAge.textContent = record.age + ' سنة';
-        ticketCollege.textContent = record.college;
+        ticketId.textContent = regCode;
+        ticketName.textContent = nameVal;
+        ticketAge.textContent = ageVal + ' سنة';
+        ticketCollege.textContent = collegeVal;
 
         form.classList.add('hidden');
         confirmationCard.classList.remove('hidden');
-        showToast('تم حفظ التسجيل بنجاح');
-      });
+        showToast('تم إرسال تسجيلك بنجاح');
+      } catch (err) {
+        console.error(err);
+        showToast('حدث خطأ أثناء الإرسال، تأكد من إعدادات Firebase');
+      } finally {
+        submitRegBtn.disabled = false;
+        submitRegBtn.textContent = 'تأكيد وإرسال التسجيل';
+      }
+    });
 
-      printTicketBtn.addEventListener('click', () => window.print());
+    printTicketBtn.addEventListener('click', () => window.print());
 
-      newRegistrationBtn.addEventListener('click', () => {
-        form.reset();
-        uploadedFileData = null;
-        previewContainer.classList.add('hidden');
-        uploadPrompt.classList.remove('hidden');
-        confirmationCard.classList.add('hidden');
-        form.classList.remove('hidden');
-      });
+    newRegistrationBtn.addEventListener('click', () => {
+      form.reset();
+      compressedImageDataUrl = null;
+      uploadedFileName = '';
+      previewContainer.classList.add('hidden');
+      uploadPrompt.classList.remove('hidden');
+      confirmationCard.classList.add('hidden');
+      form.classList.remove('hidden');
+    });
 
-      // QR Generator controls
-      generateQrBtn.addEventListener('click', () => {
-        const url = formUrlInput.value.trim();
-        if (!url) {
-          showToast('يرجى إدخال الرابط أولاً');
-          return;
+    // Firebase Status Notice
+    if (isFirebaseConfigured) {
+      firebaseStatusNotice.textContent = 'متصل بمشروع Firebase — استخدم بريد وكلمة مرور الإدارة للدخول.';
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          showDashboard(user.email);
+        } else {
+          showLogin();
         }
-        renderShareQr(url);
-        showToast('تم تحديث رمز QR');
       });
+    } else {
+      firebaseStatusNotice.innerHTML = 'وضع المعاينة المحلية: أضف <span class="font-mono">FIREBASE_CONFIG</span> داخل الكود لتفعيل البث المباشر عبر الإنترنت. يمكنك التجربة الآن بالبريد <span class="font-mono">arabi@sooq</span> وكلمة المرور <span class="font-mono">8606971566</span>.';
+    }
 
-      downloadQrBtn.addEventListener('click', () => {
-        if (!shareQrCanvas) return;
-        const link = document.createElement('a');
-        link.download = 'al-arabi-registration-qr.png';
-        link.href = shareQrCanvas.toDataURL('image/png');
-        link.click();
-        showToast('تم تحميل صورة رمز QR');
-      });
+    function showLogin() {
+      adminLoginCard.classList.remove('hidden');
+      adminDashboard.classList.add('hidden');
+      if (unsubscribeSnapshot) {
+        unsubscribeSnapshot();
+        unsubscribeSnapshot = null;
+      }
+    }
 
-      // Registrations Log
-      function renderRegistrations() {
-        const list = getRegistrations();
-        if (!list.length) {
-          registrationsList.innerHTML = '<p class="py-6 text-center text-xs text-amberGold-200/55">لا توجد تسجيلات محفوظة بعد.</p>';
-          return;
+    function showDashboard(emailLabel) {
+      adminLoginCard.classList.add('hidden');
+      adminDashboard.classList.remove('hidden');
+      adminUserLabel.textContent = emailLabel;
+      renderShareQr(formUrlInput.value);
+
+      if (isFirebaseConfigured && db) {
+        liveIndicator.innerHTML = '<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> متصل مباشر • Live';
+        const q = query(collection(db, 'registrations'), orderBy('createdAtMs', 'desc'));
+        initialLoadDone = false;
+        unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+          const prevCount = allRegistrations.length;
+          allRegistrations = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          if (initialLoadDone && allRegistrations.length > prevCount) {
+            playNotificationChime();
+            showToast('تسجيل جديد وصل الآن!');
+          }
+          initialLoadDone = true;
+          renderDashboard();
+        }, (err) => {
+          console.error(err);
+          showToast('تعذر قراءة البيانات من Firestore');
+        });
+      } else {
+        liveIndicator.innerHTML = '<span class="h-2 w-2 rounded-full bg-amberGold-400"></span> وضع محلي (Local)';
+        allRegistrations = getLocalRegistrations();
+        renderDashboard();
+      }
+    }
+
+    // Admin Login
+    adminLoginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      loginErrorMsg.classList.add('hidden');
+      let emailVal = adminEmail.value.trim();
+      const passVal = adminPassword.value;
+
+      if (isFirebaseConfigured && auth) {
+        // Firebase Auth requires a domain TLD (e.g., arabi@sooq.app)
+        if (emailVal === 'arabi@sooq') {
+          emailVal = 'arabi@sooq.app';
         }
-        registrationsList.innerHTML = list.map((item) => `
-          <div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amberGold-400/20 bg-mahogany-950/65 px-4 py-3">
-            <div>
-              <p class="font-bold text-amberGold-200">${escapeHtml(item.name)} <span class="text-xs font-normal text-amberGold-300">(${item.age} سنة)</span></p>
-              <p class="text-xs text-amberGold-200/70">${escapeHtml(item.college)} • <span class="font-mono" dir="ltr">${escapeHtml(item.id)}</span></p>
+        try {
+          await signInWithEmailAndPassword(auth, emailVal, passVal);
+          showToast('تم تسجيل الدخول بنجاح');
+        } catch (err) {
+          loginErrorMsg.textContent = 'بيانات الدخول غير صحيحة أو الحساب غير مضاف في Firebase Auth.';
+          loginErrorMsg.classList.remove('hidden');
+        }
+      } else {
+        if ((emailVal === 'arabi@sooq' || emailVal === 'arabi@sooq.app') && passVal === '8606971566') {
+          showDashboard('arabi@sooq (Local)');
+          showToast('تم تسجيل الدخول في الوضع المحلي');
+        } else {
+          loginErrorMsg.textContent = 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
+          loginErrorMsg.classList.remove('hidden');
+        }
+      }
+    });
+
+    adminLogoutBtn.addEventListener('click', async () => {
+      if (isFirebaseConfigured && auth) {
+        await signOut(auth);
+      }
+      showLogin();
+      showToast('تم تسجيل الخروج');
+    });
+
+    // Dashboard Filters & Search
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.className = 'filter-btn rounded-lg px-3 py-1.5 text-xs font-semibold border border-amberGold-400/25 text-amberGold-200/80 hover:bg-mahogany-800';
+        });
+        btn.className = 'filter-btn rounded-lg px-3 py-1.5 text-xs font-semibold bg-amberGold-500 text-mahogany-950';
+        renderDashboard();
+      });
+    });
+
+    searchInput.addEventListener('input', () => renderDashboard());
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderDashboard() {
+      const total = allRegistrations.length;
+      const pending = allRegistrations.filter(r => r.status === 'pending').length;
+      const approved = allRegistrations.filter(r => r.status === 'approved').length;
+
+      kpiTotal.textContent = total;
+      kpiPending.textContent = pending;
+      kpiApproved.textContent = approved;
+      kpiRevenue.textContent = '₹ ' + (approved * 50);
+
+      const qText = searchInput.value.trim().toLowerCase();
+      const filtered = allRegistrations.filter(r => {
+        const matchesFilter = currentFilter === 'all' || r.status === currentFilter;
+        const matchesQuery = !qText ||
+          (r.name || '').toLowerCase().includes(qText) ||
+          (r.college || '').toLowerCase().includes(qText) ||
+          (r.regCode || '').toLowerCase().includes(qText);
+        return matchesFilter && matchesQuery;
+      });
+
+      if (!filtered.length) {
+        registrationsList.innerHTML = '<div class="glass-card rounded-2xl p-8 text-center text-sm text-amberGold-200/55">لا توجد تسجيلات مطابقة.</div>';
+        return;
+      }
+
+      const statusMeta = {
+        pending: { label: 'قيد المراجعة', cls: 'bg-amberGold-500/15 text-amberGold-300 border-amberGold-400/35' },
+        approved: { label: 'مؤكد', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' },
+        rejected: { label: 'مرفوض', cls: 'bg-red-500/15 text-red-300 border-red-400/35' }
+      };
+
+      registrationsList.innerHTML = filtered.map((item) => {
+        const st = statusMeta[item.status] || statusMeta.pending;
+        return `
+          <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="text-base font-bold text-amberGold-200">${escapeHtml(item.name)}</h3>
+                <span class="rounded-md border px-2 py-0.5 text-[11px] font-semibold ${st.cls}">${st.label}</span>
+                <span class="font-mono text-xs text-amberGold-300/80" dir="ltr">${escapeHtml(item.regCode)}</span>
+              </div>
+              <p class="text-xs text-amberGold-200/75">
+                العمر: <strong>${escapeHtml(item.age)}</strong> • الكلية: <strong>${escapeHtml(item.college)}</strong>
+              </p>
+              <p class="text-[11px] text-amberGold-200/50">${escapeHtml(item.submittedAt)}</p>
             </div>
-            <div class="text-left text-xs">
-              <span class="inline-block rounded-md bg-emerald-500/15 px-2 py-0.5 text-emerald-300 border border-emerald-400/30">₹50 مرفق</span>
-              <p class="mt-1 text-[11px] text-amberGold-200/50">${escapeHtml(item.submittedAt)}</p>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" data-action="view" data-id="${escapeHtml(item.id)}" class="rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-3 py-1.5 text-xs font-semibold text-amberGold-200 hover:bg-mahogany-700">
+                عرض الإيصال
+              </button>
+              <button type="button" data-action="approve" data-id="${escapeHtml(item.id)}" class="rounded-xl border border-emerald-400/40 bg-emerald-500/15 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-500/30">
+                اعتماد
+              </button>
+              <button type="button" data-action="reject" data-id="${escapeHtml(item.id)}" class="rounded-xl border border-amberGold-400/30 bg-amberGold-500/10 px-3 py-1.5 text-xs font-semibold text-amberGold-300 hover:bg-amberGold-500/25">
+                رفض
+              </button>
+              <button type="button" data-action="delete" data-id="${escapeHtml(item.id)}" class="rounded-xl border border-red-400/35 bg-red-500/15 px-3 py-1.5 text-xs font-semibold text-red-300 hover:bg-red-500/30">
+                حذف
+              </button>
             </div>
           </div>
-        `).join('');
+        `;
+      }).join('');
+    }
+
+    // Event delegation for registration actions
+    registrationsList.addEventListener('click', async (e) => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const id = btn.dataset.id;
+      const item = allRegistrations.find(r => String(r.id) === String(id));
+      if (!item) return;
+
+      if (action === 'view') {
+        modalParticipantTitle.textContent = `إيصال الدفع — ${item.name} (${item.regCode})`;
+        modalScreenshotImg.src = item.screenshotDataUrl || '';
+        screenshotModal.classList.remove('hidden');
+        return;
       }
 
-      function escapeHtml(str) {
-        return String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      }
-
-      exportCsvBtn.addEventListener('click', () => {
-        const list = getRegistrations();
-        if (!list.length) {
-          showToast('لا توجد بيانات للتصدير');
-          return;
+      if (isFirebaseConfigured && db) {
+        const ref = doc(db, 'registrations', id);
+        if (action === 'approve') {
+          await updateDoc(ref, { status: 'approved' });
+          showToast('تم اعتماد التسجيل');
+        } else if (action === 'reject') {
+          await updateDoc(ref, { status: 'rejected' });
+          showToast('تم رفض التسجيل');
+        } else if (action === 'delete') {
+          await deleteDoc(ref);
+          showToast('تم حذف السجل');
         }
-        const header = ['ID', 'Name', 'Age', 'College', 'Fee', 'Screenshot', 'Timestamp'];
-        const rows = list.map(r => [r.id, r.name, r.age, r.college, r.fee, r.screenshotName, r.submittedAt]);
-        const csv = '\uFEFF' + [header, ...rows].map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'al-arabi-registrations.csv';
-        a.click();
-        showToast('تم تصدير ملف CSV');
-      });
+      } else {
+        if (action === 'approve') item.status = 'approved';
+        else if (action === 'reject') item.status = 'rejected';
+        else if (action === 'delete') allRegistrations = allRegistrations.filter(r => String(r.id) !== String(id));
+        try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allRegistrations)); } catch (err) {}
+        renderDashboard();
+      }
+    });
 
-      clearLogBtn.addEventListener('click', () => {
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch (e) {}
-        renderRegistrations();
-        showToast('تم مسح السجل المحلي');
-      });
+    closeModalBtn.addEventListener('click', () => screenshotModal.classList.add('hidden'));
+    screenshotModal.addEventListener('click', (e) => {
+      if (e.target === screenshotModal) screenshotModal.classList.add('hidden');
+    });
 
-      // Init
-      window.addEventListener('load', () => {
-        renderShareQr('');
-      });
-    })();
+    // Export CSV
+    exportCsvBtn.addEventListener('click', () => {
+      if (!allRegistrations.length) {
+        showToast('لا توجد بيانات للتصدير');
+        return;
+      }
+      const header = ['RegCode', 'Name', 'Age', 'College', 'Fee_INR', 'Status', 'SubmittedAt'];
+      const rows = allRegistrations.map(r => [r.regCode, r.name, r.age, r.college, r.fee, r.status, r.submittedAt]);
+      const csv = '\uFEFF' + [header, ...rows].map(row => row.map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'al-arabi-registrations.csv';
+      a.click();
+      showToast('تم تصدير ملف CSV');
+    });
+
+    // QR Generator
+    function renderShareQr(url) {
+      const target = (url || '').trim() || 'https://alarabi-ashen.vercel.app/';
+      if (window.QRCode && shareQrCanvas) {
+        window.QRCode.toCanvas(shareQrCanvas, target, {
+          width: 160,
+          margin: 1,
+          color: { dark: '#1C0A04', light: '#FFFFFF' }
+        });
+        qrUrlPreview.textContent = target;
+      }
+    }
+
+    generateQrBtn.addEventListener('click', () => {
+      renderShareQr(formUrlInput.value);
+      showToast('تم تحديث رمز QR');
+    });
+
+    downloadQrBtn.addEventListener('click', () => {
+      if (!shareQrCanvas) return;
+      const link = document.createElement('a');
+      link.download = 'al-arabi-registration-qr.png';
+      link.href = shareQrCanvas.toDataURL('image/png');
+      link.click();
+      showToast('تم تحميل صورة رمز QR');
+    });
+
+    // Open admin tab directly if URL has #admin
+    window.addEventListener('load', () => {
+      if (window.location.hash === '#admin') {
+        switchTab('admin');
+      }
+    });
   </script>
 </body>
 </html>
