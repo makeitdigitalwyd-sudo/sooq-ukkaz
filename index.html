@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>العربي — استمارة التسجيل | جامعة دار الهدى الإسلامية</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mahogany: {
+              950: '#120602',
+              900: '#1C0A04',
+              800: '#2A1107',
+              700: '#3D1A0C',
+            },
+            amberGold: {
+              200: '#FBE5C8',
+              300: '#F6C892',
+              400: '#E6A15C',
+              500: '#D4833B',
+              600: '#B56322',
+            }
+          },
+          fontFamily: {
+            amiri: ['Amiri', 'serif'],
+            cairo: ['Cairo', 'Inter', 'sans-serif'],
+            sans: ['Cairo', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #120602;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(212, 131, 59, 0.16) 0%, transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(181, 99, 34, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(230, 161, 92, 0.08) 0%, transparent 45%);
+      color: #FBE5C8;
+      font-family: 'Cairo', 'Inter', sans-serif;
+    }
+
+    .arabesque-border {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23E6A15C' stroke-opacity='0.22' stroke-width='1'%3E%3Cpath d='M30 0 L38 22 L60 30 L38 38 L30 60 L22 38 L0 30 L22 22 Z'/%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FBE5C8 0%, #E6A15C 55%, #D4833B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass-card {
+      background: linear-gradient(160deg, rgba(42, 17, 7, 0.92) 0%, rgba(24, 9, 3, 0.96) 100%);
+      border: 1px solid rgba(230, 161, 92, 0.28);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(251, 229, 200, 0.08);
+    }
+
+    .input-field {
+      background-color: rgba(18, 6, 2, 0.75);
+      border: 1px solid rgba(230, 161, 92, 0.28);
+      color: #FBE5C8;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #E6A15C;
+      box-shadow: 0 0 0 3px rgba(230, 161, 92, 0.16);
+    }
+
+    .input-field::placeholder {
+      color: rgba(246, 200, 146, 0.38);
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #1c0a04 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-card {
+        border: 2px solid #b56322 !important;
+        background: #ffffff !important;
+        color: #1c0a04 !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-amberGold-500 selection:text-mahogany-950">
+
+  <!-- Top Navigation Bar -->
+  <header class="no-print sticky top-0 z-30 border-b border-amberGold-400/20 bg-mahogany-950/85 backdrop-blur-md">
+    <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3 sm:px-6">
+      <div class="flex items-center gap-3">
+        <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-amberGold-400/40 bg-mahogany-800 text-amberGold-300 font-amiri text-xl font-bold">
+          ع
+        </div>
+        <div>
+          <p class="text-xs font-semibold text-amberGold-300 sm:text-sm">مسابقة العربي</p>
+          <p class="text-[11px] text-amberGold-200/65">جامعة دار الهدى الإسلامية</p>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-1.5 sm:gap-2">
+        <button id="tabRegisterBtn" type="button" class="rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950">
+          استمارة التسجيل
+        </button>
+        <button id="tabOrganizerBtn" type="button" class="rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25">
+          رمز QR والسجل
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-10">
+
+    <!-- Hero Banner (Poster-Inspired) -->
+    <section class="no-print relative overflow-hidden rounded-2xl border border-amberGold-400/35 bg-mahogany-900 p-6 sm:p-8 mb-6 shadow-2xl">
+      <div class="arabesque-border pointer-events-none absolute inset-0 opacity-45"></div>
+      <div class="relative z-10 text-center">
+        <p class="text-xs font-medium tracking-wide text-amberGold-300/90 sm:text-sm">
+          قسم اللغة العربية وآدابها • كلية اللغات والآداب
+        </p>
+        <p class="mt-1 text-xs text-amberGold-200/75">
+          جامعة دار الهدى الإسلامية — DARUL HUDA ISLAMIC UNIVERSITY
+        </p>
+
+        <h1 class="mt-4 font-amiri text-5xl font-bold leading-tight gold-gradient-text sm:text-6xl">
+          العربي
+        </h1>
+        <p class="mt-2 text-base font-semibold text-amberGold-200 sm:text-lg">
+          مسابقة لاكتشاف البطل في اللغة العربية
+        </p>
+
+        <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-amberGold-400/40 bg-mahogany-950/75 px-3.5 py-1.5 font-semibold text-amberGold-300">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            ١٩ ديسمبر ٢٠٢٦
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-amberGold-400/40 bg-mahogany-950/75 px-3.5 py-1.5 font-semibold text-amberGold-300">
+            رسوم التسجيل: 50 روبية
+          </span>
+        </div>
+
+        <!-- Prizes Strip -->
+        <div class="mt-5 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto">
+          <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
+            <p class="text-[11px] text-amberGold-200/70">المركز الأول</p>
+            <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 4444</p>
+          </div>
+          <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
+            <p class="text-[11px] text-amberGold-200/70">المركز الثاني</p>
+            <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 3333</p>
+          </div>
+          <div class="rounded-xl border border-amberGold-400/30 bg-mahogany-950/60 px-2 py-2.5">
+            <p class="text-[11px] text-amberGold-200/70">المركز الثالث</p>
+            <p class="mt-0.5 text-base font-bold text-amberGold-300 sm:text-lg" dir="ltr">₹ 2222</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: REGISTRATION FORM -->
+    <section id="registerView" class="space-y-6">
+      <form id="registrationForm" novalidate class="glass-card rounded-2xl p-5 sm:p-8 space-y-6">
+        <div class="border-b border-amberGold-400/20 pb-4">
+          <h2 class="text-lg font-bold text-amberGold-200 sm:text-xl">بيانات المشارك</h2>
+          <p class="mt-1 text-xs text-amberGold-200/70 sm:text-sm">
+            يرجى تعبئة جميع الحقول المطلوبة بدقة وإرفاق لقطة شاشة لإيصال الدفع.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <!-- اسم المشارك -->
+          <div class="sm:col-span-2">
+            <label for="participantName" class="mb-2 block text-sm font-semibold text-amberGold-200">
+              اسم المشارك <span class="text-amberGold-400">*</span>
+            </label>
+            <input
+              id="participantName"
+              name="participantName"
+              type="text"
+              required
+              placeholder="أدخل الاسم الكامل للمشارك"
+              class="input-field w-full rounded-xl px-4 py-3 text-sm sm:text-base"
+            />
+            <p id="errName" class="mt-1.5 hidden text-xs text-red-400">يرجى إدخال اسم المشارك.</p>
+          </div>
+
+          <!-- عمر المشارك -->
+          <div>
+            <label for="participantAge" class="mb-2 block text-sm font-semibold text-amberGold-200">
+              عمر المشارك <span class="text-amberGold-400">*</span>
+            </label>
+            <input
+              id="participantAge"
+              name="participantAge"
+              type="number"
+              min="10"
+              max="60"
+              required
+              placeholder="مثال: 20"
+              class="input-field w-full rounded-xl px-4 py-3 text-sm sm:text-base"
+            />
+            <p id="errAge" class="mt-1.5 hidden text-xs text-red-400">يرجى إدخال عمر صحيح (بين 10 و 60).</p>
+          </div>
+
+          <!-- كلية -->
+          <div>
+            <label for="collegeName" class="mb-2 block text-sm font-semibold text-amberGold-200">
+              كلية <span class="text-amberGold-400">*</span>
+            </label>
+            <input
+              id="collegeName"
+              name="collegeName"
+              type="text"
+              required
+              placeholder="اسم الكلية أو المعهد"
+              class="input-field w-full rounded-xl px-4 py-3 text-sm sm:text-base"
+            />
+            <p id="errCollege" class="mt-1.5 hidden text-xs text-red-400">يرجى إدخال اسم الكلية.</p>
+          </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="rounded-2xl border border-amberGold-400/35 bg-mahogany-950/70 p-4 sm:p-6">
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="space-y-2.5 flex-1">
+              <div class="inline-flex items-center gap-2 rounded-lg bg-amberGold-500/15 px-3 py-1 text-xs font-bold text-amberGold-300 border border-amberGold-400/30">
+                رسوم التسجيل: 50 روبية (₹50)
+              </div>
+              <h3 class="text-base font-bold text-amberGold-200 sm:text-lg">
+                الدفع عبر UPI / GPay / PhonePe
+              </h3>
+              <p class="text-xs leading-relaxed text-amberGold-200/75 sm:text-sm">
+                يرجى تحويل مبلغ <strong class="text-amberGold-300">50 روبية</strong> إلى الرقم التالي، ثم التقاط لقطة شاشة (Screenshot) لإيصال الدفع وإرفاقها أدناه:
+              </p>
+
+              <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                <div class="rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2 font-mono text-sm font-bold text-amberGold-200 sm:text-base" dir="ltr">
+                  +91 90725 84470
+                </div>
+                <button
+                  id="copyPhoneBtn"
+                  type="button"
+                  class="inline-flex items-center gap-1.5 rounded-xl border border-amberGold-400/40 bg-amberGold-500/20 px-3.5 py-2 text-xs font-semibold text-amberGold-200 transition hover:bg-amberGold-500 hover:text-mahogany-950"
+                >
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  نسخ الرقم
+                </button>
+              </div>
+            </div>
+
+            <!-- Payment QR Preview -->
+            <div class="flex flex-col items-center justify-center rounded-xl border border-amberGold-400/30 bg-white p-3 self-center sm:self-auto">
+              <canvas id="upiQrCanvas" class="h-28 w-28"></canvas>
+              <span class="mt-1.5 text-[10px] font-semibold text-mahogany-900" dir="ltr">UPI • ₹50</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screenshot Upload -->
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-amberGold-200">
+            إرفاق لقطة شاشة لإيصال الدفع (Screenshot) <span class="text-amberGold-400">*</span>
+          </label>
+
+          <div
+            id="dropZone"
+            class="relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-amberGold-400/35 bg-mahogany-950/60 p-6 text-center transition hover:border-amberGold-400/70 cursor-pointer"
+          >
+            <input
+              id="screenshotInput"
+              type="file"
+              accept="image/*"
+              class="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+            />
+            <div id="uploadPrompt" class="space-y-2 pointer-events-none">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amberGold-500/15 text-amberGold-300 border border-amberGold-400/30">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              </div>
+              <p class="text-sm font-semibold text-amberGold-200">اضغط لاختيار صورة الإيصال أو اسحبها هنا</p>
+              <p class="text-xs text-amberGold-200/60">PNG, JPG, WEBP — الحد الأقصى الموصى به 5MB</p>
+            </div>
+
+            <div id="previewContainer" class="hidden w-full space-y-3">
+              <img id="screenshotPreview" alt="معاينة إيصال الدفع" class="mx-auto max-h-52 rounded-xl border border-amberGold-400/30 object-contain shadow-lg" />
+              <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
+                <span id="fileNameLabel" class="text-amberGold-200/80 font-mono" dir="ltr"></span>
+                <button id="removeFileBtn" type="button" class="relative z-10 rounded-lg border border-red-400/40 bg-red-500/15 px-3 py-1 font-semibold text-red-300 hover:bg-red-500/30">
+                  إزالة الصورة
+                </button>
+              </div>
+            </div>
+          </div>
+          <p id="errScreenshot" class="mt-1.5 hidden text-xs text-red-400">يرجى إرفاق لقطة شاشة لإيصال الدفع.</p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="w-full rounded-xl bg-gradient-to-l from-amberGold-500 to-amberGold-400 px-6 py-3.5 text-base font-bold text-mahogany-950 shadow-lg shadow-amberGold-500/20 transition hover:brightness-110 active:scale-[0.99]"
+          >
+            تأكيد وإرسال التسجيل
+          </button>
+        </div>
+      </form>
+
+      <!-- Confirmation Ticket (Hidden until submitted) -->
+      <div id="confirmationCard" class="hidden glass-card print-card rounded-2xl p-6 sm:p-8 text-center space-y-5">
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40">
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-amberGold-200">تم تسجيل مشاركتك بنجاح</h2>
+          <p class="mt-1 text-sm text-amberGold-200/75">مسابقة العربي — جامعة دار الهدى الإسلامية</p>
+        </div>
+
+        <div class="mx-auto max-w-md rounded-xl border border-amberGold-400/30 bg-mahogany-950/70 p-4 text-right space-y-2.5 text-sm">
+          <div class="flex justify-between border-b border-amberGold-400/15 pb-2">
+            <span class="text-amberGold-200/65">رقم التسجيل:</span>
+            <span id="ticketId" class="font-mono font-bold text-amberGold-300" dir="ltr"></span>
+          </div>
+          <div class="flex justify-between border-b border-amberGold-400/15 pb-2">
+            <span class="text-amberGold-200/65">اسم المشارك:</span>
+            <span id="ticketName" class="font-semibold text-amberGold-200"></span>
+          </div>
+          <div class="flex justify-between border-b border-amberGold-400/15 pb-2">
+            <span class="text-amberGold-200/65">العمر:</span>
+            <span id="ticketAge" class="font-semibold text-amberGold-200"></span>
+          </div>
+          <div class="flex justify-between border-b border-amberGold-400/15 pb-2">
+            <span class="text-amberGold-200/65">الكلية:</span>
+            <span id="ticketCollege" class="font-semibold text-amberGold-200"></span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-amberGold-200/65">إيصال الدفع:</span>
+            <span class="font-semibold text-emerald-400">مرفق (₹50)</span>
+          </div>
+        </div>
+
+        <div class="no-print flex flex-wrap items-center justify-center gap-3 pt-2">
+          <button id="printTicketBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-5 py-2.5 text-sm font-semibold text-amberGold-200 hover:bg-mahogany-700">
+            طباعة / حفظ البطاقة
+          </button>
+          <button id="newRegistrationBtn" type="button" class="rounded-xl bg-amberGold-500 px-5 py-2.5 text-sm font-bold text-mahogany-950 hover:bg-amberGold-400">
+            تسجيل مشارك آخر
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: ORGANIZER QR GENERATOR & LOG -->
+    <section id="organizerView" class="hidden space-y-6">
+      <!-- QR Code Generator Card -->
+      <div class="glass-card rounded-2xl p-5 sm:p-8 space-y-5">
+        <div class="border-b border-amberGold-400/20 pb-4">
+          <h2 class="text-lg font-bold text-amberGold-200 sm:text-xl">إنشاء رمز QR لرابط الاستمارة</h2>
+          <p class="mt-1 text-xs text-amberGold-200/70 sm:text-sm">
+            بعد رفع هذه الصفحة على استضافة (مثل Netlify أو GitHub Pages أو Google Sites)، الصق الرابط هنا لتوليد رمز QR أنيق جاهز للطباعة والنشر.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 items-center">
+          <div class="space-y-4">
+            <div>
+              <label for="formUrlInput" class="mb-2 block text-sm font-semibold text-amberGold-200">
+                رابط التسجيل المنشور (URL)
+              </label>
+              <input
+                id="formUrlInput"
+                type="url"
+                dir="ltr"
+                placeholder="https://your-site.netlify.app/registration"
+                class="input-field w-full rounded-xl px-4 py-3 text-sm"
+              />
+            </div>
+
+            <div class="flex flex-wrap gap-2.5">
+              <button id="generateQrBtn" type="button" class="rounded-xl bg-amberGold-500 px-5 py-2.5 text-sm font-bold text-mahogany-950 hover:bg-amberGold-400">
+                توليد رمز QR
+              </button>
+              <button id="downloadQrBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2.5 text-sm font-semibold text-amberGold-200 hover:bg-mahogany-700">
+                تحميل صورة QR (PNG)
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center justify-center rounded-2xl border border-amberGold-400/35 bg-white p-6 text-center shadow-xl">
+            <p class="font-amiri text-2xl font-bold text-mahogany-900">العربي</p>
+            <p class="text-[11px] font-semibold text-amberGold-600 mb-3">امسح الرمز للتسجيل في المسابقة</p>
+            <canvas id="shareQrCanvas" class="h-48 w-48"></canvas>
+            <p id="qrUrlPreview" class="mt-3 max-w-[220px] truncate text-[11px] font-mono text-gray-500" dir="ltr">
+              أدخل الرابط لتحديث الرمز
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Registrations List -->
+      <div class="glass-card rounded-2xl p-5 sm:p-8 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amberGold-400/20 pb-4">
+          <div>
+            <h2 class="text-lg font-bold text-amberGold-200">سجل المسجلين (محلي على هذا المتصفح)</h2>
+            <p class="text-xs text-amberGold-200/65">لحفظ البيانات عبر الإنترنت من جميع الأجهزة، اربط زر الإرسال بخدمة مثل Formspree أو Google Apps Script.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="exportCsvBtn" type="button" class="rounded-xl border border-amberGold-400/40 bg-amberGold-500/20 px-3.5 py-2 text-xs font-semibold text-amberGold-200 hover:bg-amberGold-500 hover:text-mahogany-950">
+              تصدير CSV
+            </button>
+            <button id="clearLogBtn" type="button" class="rounded-xl border border-red-400/35 bg-red-500/15 px-3.5 py-2 text-xs font-semibold text-red-300 hover:bg-red-500/30">
+              مسح السجل
+            </button>
+          </div>
+        </div>
+
+        <div id="registrationsList" class="space-y-2.5 text-sm">
+          <p class="py-6 text-center text-xs text-amberGold-200/55">لا توجد تسجيلات محفوظة بعد.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Contact -->
+    <footer class="no-print mt-8 border-t border-amberGold-400/15 pt-5 text-center text-xs text-amberGold-200/65 space-y-1">
+      <p>للمزيد من الاستفسارات: <span class="font-mono font-semibold text-amberGold-300" dir="ltr">8590409367</span> • <span dir="ltr">@arabic_language_literature</span></p>
+      <p>قسم اللغة العربية وآدابها — جامعة دار الهدى الإسلامية</p>
+    </footer>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="no-print pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-xl border border-amberGold-400/40 bg-mahogany-800 px-4 py-2.5 text-xs font-semibold text-amberGold-200 opacity-0 shadow-2xl transition-all duration-200">
+    تم النسخ
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'al_arabi_registrations_v1';
+      let uploadedFileData = null;
+
+      // DOM elements
+      const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+      const tabOrganizerBtn = document.getElementById('tabOrganizerBtn');
+      const registerView = document.getElementById('registerView');
+      const organizerView = document.getElementById('organizerView');
+
+      const form = document.getElementById('registrationForm');
+      const participantName = document.getElementById('participantName');
+      const participantAge = document.getElementById('participantAge');
+      const collegeName = document.getElementById('collegeName');
+      const screenshotInput = document.getElementById('screenshotInput');
+      const uploadPrompt = document.getElementById('uploadPrompt');
+      const previewContainer = document.getElementById('previewContainer');
+      const screenshotPreview = document.getElementById('screenshotPreview');
+      const fileNameLabel = document.getElementById('fileNameLabel');
+      const removeFileBtn = document.getElementById('removeFileBtn');
+
+      const errName = document.getElementById('errName');
+      const errAge = document.getElementById('errAge');
+      const errCollege = document.getElementById('errCollege');
+      const errScreenshot = document.getElementById('errScreenshot');
+
+      const confirmationCard = document.getElementById('confirmationCard');
+      const ticketId = document.getElementById('ticketId');
+      const ticketName = document.getElementById('ticketName');
+      const ticketAge = document.getElementById('ticketAge');
+      const ticketCollege = document.getElementById('ticketCollege');
+      const printTicketBtn = document.getElementById('printTicketBtn');
+      const newRegistrationBtn = document.getElementById('newRegistrationBtn');
+      const copyPhoneBtn = document.getElementById('copyPhoneBtn');
+
+      const formUrlInput = document.getElementById('formUrlInput');
+      const generateQrBtn = document.getElementById('generateQrBtn');
+      const downloadQrBtn = document.getElementById('downloadQrBtn');
+      const shareQrCanvas = document.getElementById('shareQrCanvas');
+      const qrUrlPreview = document.getElementById('qrUrlPreview');
+      const registrationsList = document.getElementById('registrationsList');
+      const exportCsvBtn = document.getElementById('exportCsvBtn');
+      const clearLogBtn = document.getElementById('clearLogBtn');
+      const toast = document.getElementById('toast');
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.remove('opacity-0', 'translate-y-4');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-4');
+          toast.classList.remove('opacity-100', 'translate-y-0');
+        }, 2500);
+      }
+
+      // Render UPI Payment QR
+      function renderUpiQr() {
+        const upiUri = 'upi://pay?pa=9072584470@upi&pn=Al-Arabi%20Competition&am=50&cu=INR';
+        const canvas = document.getElementById('upiQrCanvas');
+        if (window.QRCode && canvas) {
+          window.QRCode.toCanvas(canvas, upiUri, {
+            width: 112,
+            margin: 1,
+            color: { dark: '#1C0A04', light: '#FFFFFF' }
+          });
+        }
+      }
+
+      // Render Shareable Form QR
+      function renderShareQr(url) {
+        const target = (url || '').trim() || 'https://darulhuda.example.com/al-arabi-registration';
+        if (window.QRCode && shareQrCanvas) {
+          window.QRCode.toCanvas(shareQrCanvas, target, {
+            width: 192,
+            margin: 1,
+            color: { dark: '#1C0A04', light: '#FFFFFF' }
+          });
+          qrUrlPreview.textContent = (url || '').trim() ? target : 'مثال توضيحي — أدخل رابطك أعلاه';
+        }
+      }
+
+      // Tabs
+      function switchTab(tab) {
+        if (tab === 'register') {
+          registerView.classList.remove('hidden');
+          organizerView.classList.add('hidden');
+          tabRegisterBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950';
+          tabOrganizerBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25';
+        } else {
+          registerView.classList.add('hidden');
+          organizerView.classList.remove('hidden');
+          tabOrganizerBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm bg-amberGold-500 text-mahogany-950';
+          tabRegisterBtn.className = 'rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:text-sm text-amberGold-200/80 hover:bg-mahogany-800 hover:text-amberGold-200 border border-amberGold-400/25';
+          renderRegistrations();
+        }
+      }
+
+      tabRegisterBtn.addEventListener('click', () => switchTab('register'));
+      tabOrganizerBtn.addEventListener('click', () => switchTab('organizer'));
+
+      // Copy phone number
+      copyPhoneBtn.addEventListener('click', () => {
+        const phone = '+91 90725 84470';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(phone).then(() => {
+            showToast('تم نسخ الرقم: ' + phone);
+          }).catch(() => fallbackCopy(phone));
+        } else {
+          fallbackCopy(phone);
+        }
+      });
+
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast('تم نسخ الرقم: ' + text);
+        } catch (e) {
+          showToast('الرقم: ' + text);
+        }
+        document.body.removeChild(ta);
+      }
+
+      // File upload preview
+      screenshotInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          uploadedFileData = {
+            name: file.name,
+            size: Math.round(file.size / 1024) + ' KB',
+            dataUrl: ev.target.result
+          };
+          screenshotPreview.src = uploadedFileData.dataUrl;
+          fileNameLabel.textContent = `${uploadedFileData.name} (${uploadedFileData.size})`;
+          uploadPrompt.classList.add('hidden');
+          previewContainer.classList.remove('hidden');
+          errScreenshot.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+      });
+
+      removeFileBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        uploadedFileData = null;
+        screenshotInput.value = '';
+        screenshotPreview.src = '';
+        previewContainer.classList.add('hidden');
+        uploadPrompt.classList.remove('hidden');
+      });
+
+      // Local storage helpers
+      function getRegistrations() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function saveRegistration(entry) {
+        try {
+          const list = getRegistrations();
+          list.unshift(entry);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } catch (e) {
+          // Ignore storage quota errors gracefully
+        }
+      }
+
+      // Form validation & submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let valid = true;
+
+        const nameVal = participantName.value.trim();
+        const ageVal = parseInt(participantAge.value, 10);
+        const collegeVal = collegeName.value.trim();
+
+        if (!nameVal) {
+          errName.classList.remove('hidden');
+          valid = false;
+        } else {
+          errName.classList.add('hidden');
+        }
+
+        if (isNaN(ageVal) || ageVal < 10 || ageVal > 60) {
+          errAge.classList.remove('hidden');
+          valid = false;
+        } else {
+          errAge.classList.add('hidden');
+        }
+
+        if (!collegeVal) {
+          errCollege.classList.remove('hidden');
+          valid = false;
+        } else {
+          errCollege.classList.add('hidden');
+        }
+
+        if (!uploadedFileData) {
+          errScreenshot.classList.remove('hidden');
+          valid = false;
+        } else {
+          errScreenshot.classList.add('hidden');
+        }
+
+        if (!valid) {
+          showToast('يرجى إكمال جميع الحقول المطلوبة');
+          return;
+        }
+
+        const id = 'ARB-' + Math.floor(1000 + Math.random() * 9000);
+        const record = {
+          id,
+          name: nameVal,
+          age: ageVal,
+          college: collegeVal,
+          fee: '50 INR',
+          screenshotName: uploadedFileData.name,
+          submittedAt: new Date().toLocaleString('ar-IN')
+        };
+
+        saveRegistration(record);
+
+        ticketId.textContent = record.id;
+        ticketName.textContent = record.name;
+        ticketAge.textContent = record.age + ' سنة';
+        ticketCollege.textContent = record.college;
+
+        form.classList.add('hidden');
+        confirmationCard.classList.remove('hidden');
+        showToast('تم حفظ التسجيل بنجاح');
+      });
+
+      printTicketBtn.addEventListener('click', () => window.print());
+
+      newRegistrationBtn.addEventListener('click', () => {
+        form.reset();
+        uploadedFileData = null;
+        previewContainer.classList.add('hidden');
+        uploadPrompt.classList.remove('hidden');
+        confirmationCard.classList.add('hidden');
+        form.classList.remove('hidden');
+      });
+
+      // QR Generator controls
+      generateQrBtn.addEventListener('click', () => {
+        const url = formUrlInput.value.trim();
+        if (!url) {
+          showToast('يرجى إدخال الرابط أولاً');
+          return;
+        }
+        renderShareQr(url);
+        showToast('تم تحديث رمز QR');
+      });
+
+      downloadQrBtn.addEventListener('click', () => {
+        if (!shareQrCanvas) return;
+        const link = document.createElement('a');
+        link.download = 'al-arabi-registration-qr.png';
+        link.href = shareQrCanvas.toDataURL('image/png');
+        link.click();
+        showToast('تم تحميل صورة رمز QR');
+      });
+
+      // Registrations Log
+      function renderRegistrations() {
+        const list = getRegistrations();
+        if (!list.length) {
+          registrationsList.innerHTML = '<p class="py-6 text-center text-xs text-amberGold-200/55">لا توجد تسجيلات محفوظة بعد.</p>';
+          return;
+        }
+        registrationsList.innerHTML = list.map((item) => `
+          <div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amberGold-400/20 bg-mahogany-950/65 px-4 py-3">
+            <div>
+              <p class="font-bold text-amberGold-200">${escapeHtml(item.name)} <span class="text-xs font-normal text-amberGold-300">(${item.age} سنة)</span></p>
+              <p class="text-xs text-amberGold-200/70">${escapeHtml(item.college)} • <span class="font-mono" dir="ltr">${escapeHtml(item.id)}</span></p>
+            </div>
+            <div class="text-left text-xs">
+              <span class="inline-block rounded-md bg-emerald-500/15 px-2 py-0.5 text-emerald-300 border border-emerald-400/30">₹50 مرفق</span>
+              <p class="mt-1 text-[11px] text-amberGold-200/50">${escapeHtml(item.submittedAt)}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      exportCsvBtn.addEventListener('click', () => {
+        const list = getRegistrations();
+        if (!list.length) {
+          showToast('لا توجد بيانات للتصدير');
+          return;
+        }
+        const header = ['ID', 'Name', 'Age', 'College', 'Fee', 'Screenshot', 'Timestamp'];
+        const rows = list.map(r => [r.id, r.name, r.age, r.college, r.fee, r.screenshotName, r.submittedAt]);
+        const csv = '\uFEFF' + [header, ...rows].map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'al-arabi-registrations.csv';
+        a.click();
+        showToast('تم تصدير ملف CSV');
+      });
+
+      clearLogBtn.addEventListener('click', () => {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch (e) {}
+        renderRegistrations();
+        showToast('تم مسح السجل المحلي');
+      });
+
+      // Init
+      window.addEventListener('load', () => {
+        renderUpiQr();
+        renderShareQr('');
+      });
+    })();
+  </script>
+</body>
+</html>
