@@ -569,7 +569,7 @@
     // 1) PASTE YOUR FIREBASE CONFIG HERE FROM FIREBASE CONSOLE
     // =========================================================================
     const FIREBASE_CONFIG = {
-      apiKey: "AIzaSyA0buhAcyDKR01yLA4ni5GGnqTE5EQTdD8",
+      apiKey: "AIzaSyA0buhAcyDKR01ylA4ni5GGnqTE5EQTdD8",
       authDomain: "alarabi-cf8c6.firebaseapp.com",
       projectId: "alarabi-cf8c6",
       storageBucket: "alarabi-cf8c6.firebasestorage.app",
@@ -953,7 +953,7 @@
           await signInWithEmailAndPassword(auth, emailVal, passVal);
           showToast('تم تسجيل الدخول بنجاح');
         } catch (err) {
-          loginErrorMsg.textContent = 'بيانات الدخول غير صحيحة أو الحساب غير مضاف في Firebase Auth.';
+          loginErrorMsg.textContent = 'تعذر تسجيل الدخول (' + (err.code || 'error') + ') — تأكد من البريد وكلمة المرور في Firebase Auth.';
           loginErrorMsg.classList.remove('hidden');
         }
       } else {
