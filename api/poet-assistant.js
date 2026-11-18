@@ -1,6 +1,3 @@
-// Vercel Serverless Function: /api/poet-assistant
-// Securely proxies requests to Google Gemini API without exposing GEMINI_API_KEY to the browser.
-
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 20;
@@ -18,6 +15,15 @@ function checkRateLimit(ip) {
   return entry.count <= RATE_LIMIT_MAX;
 }
 
+async function readJsonBody(req) {
+  if (req.body && typeof req.body === 'object') return req.body;
+  if (typeof req.body === 'string' && req.body.trim()) return JSON.parse(req.body);
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  const raw = Buffer.concat(chunks).toString('utf8');
+  return raw ? JSON.parse(raw) : {};
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'METHOD_NOT_ALLOWED', message: 'Only POST requests are supported.' });
@@ -25,22 +31,19 @@ export default async function handler(req, res) {
 
   const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   if (!checkRateLimit(clientIp)) {
-    return res.status(429).json({
-      error: 'RATE_LIMITED',
-      message: 'Too many requests. Please wait a minute before trying again.'
-    });
+    return res.status(429).json({ error: 'RATE_LIMITED', message: 'Too many requests. Please wait a minute.' });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(503).json({
       error: 'AI_NOT_CONFIGURED',
-      message: 'GEMINI_API_KEY is not configured on the Vercel server. Add GEMINI_API_KEY in Vercel Project Settings -> Environment Variables and redeploy.'
+      message: 'GEMINI_API_KEY is missing in Vercel Environment Variables.'
     });
   }
 
   try {
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+    const body = await readJsonBody(req);
     const {
       action = 'chat',
       mode = 'learning',
@@ -53,23 +56,58 @@ export default async function handler(req, res) {
     } = body;
 
     if (action === 'chat' && (!message || typeof message !== 'string' || message.trim().length > 2000)) {
-      return res.status(400).json({ error: 'INVALID_INPUT', message: 'Message must be between 1 and 2000 characters.' });
+      return res.status(400).json({ error: 'INVALID_INPUT', message: 'Message must be 1-2000 characters.' });
     }
     if (action === 'evaluate' && (!poem || typeof poem !== 'string' || poem.trim().length < 5 || poem.trim().length > 4000)) {
-      return res.status(400).json({ error: 'INVALID_INPUT', message: 'Please enter at least one poetic line to evaluate.' });
+      return res.status(400).json({ error: 'INVALID_INPUT', message: 'Please enter at least one poetic line.' });
     }
 
-    const systemInstruction = `You are "رفيق الشاعر" (The Poet's Companion), an intelligent, warm, and scholarly AI Arabic Poetry Learning & Competition Assistant for the "سوق عكاظ" (Souq Ukaz) Impromptu Arabic Poetry Competition at Darul Huda Islamic University, Chemmad.
+    const systemInstruction = `You are "رفيق الشاعر" (The Poet's Companion), an AI Arabic Poetry Learning & Competition Assistant for the "سوق عكاظ" (Souq Ukaz) Competition at Darul Huda Islamic University, Chemmad.
+1. Detect the user's language (Arabic, English, or Malayalam) and reply in that same language unless asked otherwise.
+2. Mode: ${mode === 'competition' ? 'COMPETITION MODE' : 'LEARNING MODE'}. Never write or complete original poems for official competition submissions.
+3. Official facts only: ${officialContext || 'Souq Ukaz Impromptu Arabic Poetry Competition, Darul Huda Islamic University, Chemmad. Age 15-25. Stage 1 free poem on "على أنقاض العدالة" due Nov 30, 2026. Top 30 announced Dec 5, 2026. ₹50 fee for selected 30 finalists only. Final round Dec 20, 2026. Prizes ₹7001, ₹5001, ₹3001. Contacts: 8590409367, 90725 84470, arabicdept@dhiu.in.'}
+4. Note clearly that AI prosody/عروض feedback is approximate, not an authoritative ruling.`;
 
-CORE RULES:
-1. MULTILINGUAL AUTO-DETECTION: Detect the user's language (Arabic, English, or Malayalam) and respond naturally in that exact same language unless they explicitly ask for another language. You may include Arabic poetic terms with simple explanations in English or Malayalam when helpful.
-2. COMPETITION INTEGRITY (STRICT):
-   - Current Mode: ${mode === 'competition' ? 'COMPETITION MODE' : 'LEARNING MODE'}.
-   - NEVER write, generate, or complete an original poem for an official competition submission (especially on the official topic "على أنقاض العدالة" or when the user asks you to write their competition entry).
-   - NEVER help disguise AI-generated poetry as original human work.
-   - Clearly remind candidates if asked that رفيق الشاعر is a learning and practice companion, not a replacement for their own creativity.
-3. OFFICIAL COMPETITION FACTS ONLY:
-   Use ONLY the verified official competition context below when answering competition questions. If a specific detail is missing or uncertain, explicitly tell the candidate to contact the organizers (8590409367 / 90725 84470 / arabicdept@dhiu.in) instead of guessing.
-   OFFICIAL CONTEXT:
-   ${officialContext || 'Souq Ukaz Impromptu Arabic Poetry Competition, Dept. of Arabic Language & Literature, Darul Huda Islamic University, Chemmad. Age: 15-25. Stage 1: Submit 10 lines on "على أنقاض العدالة" by Nov 30, 2026 (free). Top 30 finalists announced Dec 5, 2026. Registration fee of ₹50 applies only to selected 30 finalists. Final round: Dec 20, 2026 at Darul Huda Campus. Prizes
-     
+    let contents = [];
+    if (action === 'evaluate') {
+      contents = [{
+        role: 'user',
+        parts: [{
+          text: `Evaluate this PRACTICE Arabic poem on "${topic || 'Arabic Poetry'}" (${difficulty}). Give encouraging feedback on: 1. Grammar (النحو), 2. Vocabulary (المفردات), 3. Poetic Imagery (الصورة الشعرية), 4. Rhyme (القافية), 5. Rhythm/Metre (الوزن — state it is approximate), 6. Creativity (الإبداع), plus 2 gentle tips.\n\n${poem.trim()}`
+        }]
+      }];
+    } else {
+      const safeHistory = Array.isArray(history) ? history.slice(-8) : [];
+      contents = safeHistory
+        .filter(m => m && typeof m.text === 'string' && (m.role === 'user' || m.role === 'model'))
+        .map(m => ({ role: m.role, parts: [{ text: m.text.slice(0, 1500) }] }));
+      contents.push({ role: 'user', parts: [{ text: message.trim() }] });
+    }
+
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+    const upstream = await fetch(geminiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: systemInstruction }] },
+        contents,
+        generationConfig: { temperature: mode === 'competition' ? 0.3 : 0.7, maxOutputTokens: 1200 }
+      })
+    });
+
+    if (!upstream.ok) {
+      const errText = await upstream.text();
+      return res.status(502).json({ error: 'UPSTREAM_AI_ERROR', message: errText.slice(0, 200) });
+    }
+
+    const data = await upstream.json();
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    if (!reply) {
+      return res.status(502).json({ error: 'EMPTY_AI_RESPONSE', message: 'No response generated by AI.' });
+    }
+
+    return res.status(200).json({ reply, model: 'gemini-2.5-flash' });
+  } catch (err) {
+    return res.status(500).json({ error: 'SERVER_ERROR', message: err?.message || 'Unexpected server error.' });
+  }
+}
