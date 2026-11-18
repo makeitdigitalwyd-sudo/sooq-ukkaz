@@ -1,7 +1,7 @@
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 20;
-const FALLBACK_MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3-flash-preview'];
+let modelsOrder = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3-flash-preview'];
 
 function checkRateLimit(ip) {
   const now = Date.now();
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     }
 
     const systemInstruction = `You are "رفيق الشاعر" (The Poet's Companion), an AI Arabic Poetry Learning & Competition Assistant for the "سوق عكاظ" (Souq Ukaz) Competition at Darul Huda Islamic University, Chemmad.
-1. Detect the user's language (Arabic, English, or Malayalam) and reply in that same language unless asked otherwise.
+1. Detect the user's language (Arabic, English, or Malayalam) and reply concisely in that same language unless asked otherwise.
 2. Mode: ${mode === 'competition' ? 'COMPETITION MODE' : 'LEARNING MODE'}. Never write or complete original poems for official competition submissions.
 3. Official facts only: ${officialContext || 'Souq Ukaz Impromptu Arabic Poetry Competition, Darul Huda Islamic University, Chemmad. Age 15-25. Stage 1 free poem on "على أنقاض العدالة" due Nov 30, 2026. Top 30 announced Dec 5, 2026. ₹50 fee for selected 30 finalists only. Final round Dec 20, 2026. Prizes ₹7001, ₹5001, ₹3001. Contacts: 8590409367, 90725 84470, arabicdept@dhiu.in.'}
 4. Note clearly that AI prosody/عروض feedback is approximate, not an authoritative ruling.`;
@@ -74,41 +74,58 @@ export default async function handler(req, res) {
       contents = [{
         role: 'user',
         parts: [{
-          text: `Evaluate this PRACTICE Arabic poem on "${topic || 'Arabic Poetry'}" (${difficulty}). Give encouraging feedback on: 1. Grammar (النحو), 2. Vocabulary (المفردات), 3. Poetic Imagery (الصورة الشعرية), 4. Rhyme (القافية), 5. Rhythm/Metre (الوزن — state it is approximate), 6. Creativity (الإبداع), plus 2 gentle tips.\n\n${poem.trim()}`
+          text: `Evaluate this PRACTICE Arabic poem on "${topic || 'Arabic Poetry'}" (${difficulty}). Give concise, encouraging feedback on: 1. Grammar (النحو), 2. Vocabulary (المفردات), 3. Poetic Imagery (الصورة الشعرية), 4. Rhyme (القافية), 5. Rhythm/Metre (الوزن — state it is approximate), 6. Creativity (الإبداع), plus 2 gentle tips.\n\n${poem.trim()}`
         }]
       }];
     } else {
-      const safeHistory = Array.isArray(history) ? history.slice(-8) : [];
+      const safeHistory = Array.isArray(history) ? history.slice(-4) : [];
       contents = safeHistory
         .filter(m => m && typeof m.text === 'string' && (m.role === 'user' || m.role === 'model'))
-        .map(m => ({ role: m.role, parts: [{ text: m.text.slice(0, 1500) }] }));
+        .map(m => ({ role: m.role, parts: [{ text: m.text.slice(0, 1000) }] }));
       contents.push({ role: 'user', parts: [{ text: message.trim() }] });
     }
 
     const requestBody = JSON.stringify({
       system_instruction: { parts: [{ text: systemInstruction }] },
       contents,
-      generationConfig: { temperature: mode === 'competition' ? 0.3 : 0.7, maxOutputTokens: 1200 }
+      generationConfig: {
+        temperature: mode === 'competition' ? 0.3 : 0.7,
+        maxOutputTokens: 700,
+        thinkingConfig: { thinkingBudget: 0 }
+      }
     });
 
     let lastErr = '';
-    for (const model of FALLBACK_MODELS) {
-      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
-      const upstream = await fetch(geminiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: requestBody
-      });
+    for (const model of modelsOrder) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      try {
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+        const upstream = await fetch(geminiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: requestBody,
+          signal: controller.signal
+        });
+        clearTimeout(timer);
 
-      if (upstream.ok) {
-        const data = await upstream.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-        if (reply) return res.status(200).json({ reply, model });
-      } else {
-        lastErr = await upstream.text();
-        if (upstream.status !== 503 && upstream.status !== 429 && upstream.status !== 404) {
-          return res.status(502).json({ error: 'UPSTREAM_AI_ERROR', message: lastErr.slice(0, 200) });
+        if (upstream.ok) {
+          const data = await upstream.json();
+          const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          if (reply) {
+            // Promote the fast working model to the front for subsequent requests
+            modelsOrder = [model, ...modelsOrder.filter(m => m !== model)];
+            return res.status(200).json({ reply, model });
+          }
+        } else {
+          lastErr = await upstream.text();
+          if (upstream.status !== 503 && upstream.status !== 429 && upstream.status !== 404) {
+            return res.status(502).json({ error: 'UPSTREAM_AI_ERROR', message: lastErr.slice(0, 200) });
+          }
         }
+      } catch (e) {
+        clearTimeout(timer);
+        lastErr = e.message || 'Timeout';
       }
     }
 
