@@ -90,8 +90,7 @@ export default async function handler(req, res) {
       contents,
       generationConfig: {
         temperature: mode === 'competition' ? 0.3 : 0.7,
-        maxOutputTokens: 700,
-        thinkingConfig: { thinkingBudget: 0 }
+        maxOutputTokens: 700
       }
     });
 
@@ -113,7 +112,6 @@ export default async function handler(req, res) {
           const data = await upstream.json();
           const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
           if (reply) {
-            // Promote the fast working model to the front for subsequent requests
             modelsOrder = [model, ...modelsOrder.filter(m => m !== model)];
             return res.status(200).json({ reply, model });
           }
