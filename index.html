@@ -526,6 +526,17 @@
       </div>
 
       <div id="adminDashboard" class="hidden space-y-6">
+        <!-- Admin Sub-Navigation -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="adminSubCompBtn" type="button" class="rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-gold-300 shadow-sm">
+            إدارة المشاركين والقصائد
+          </button>
+          <button id="adminSubAiBtn" type="button" class="rounded-xl border border-gold-400/50 bg-vellum-50 px-4 py-2 text-xs font-bold text-ink-800 hover:bg-vellum-100">
+            إدارة رفيق الشاعر (AI Assistant)
+          </button>
+        </div>
+
+        <div id="adminCompPanel" class="space-y-6">
         <div class="manuscript-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-3">
             <span id="liveIndicator" class="inline-flex items-center gap-2 rounded-full border border-oasis-green/35 bg-oasis-green/10 px-3 py-1 text-xs font-bold text-oasis-green">
@@ -601,6 +612,88 @@
             </div>
           </div>
         </div>
+        </div> <!-- end adminCompPanel -->
+
+        <!-- AI Assistant Management Panel (Admin Only) -->
+        <div id="adminAiPanel" class="hidden space-y-6">
+          <div class="manuscript-card rounded-2xl p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h3 class="font-ruqaa text-xl font-bold text-ink-900">إدارة رفيق الشاعر (AI Assistant Management)</h3>
+              <p class="text-xs text-ink-700/75">تفعيل المساعد الذكي، إدارة الأسئلة الشائعة، وإضافة تحديات يومية</p>
+            </div>
+            <label class="inline-flex items-center gap-2.5 cursor-pointer rounded-xl border border-gold-400/50 bg-vellum-50 px-4 py-2">
+              <input id="aiEnabledToggle" type="checkbox" checked class="h-4 w-4 accent-ink-900" />
+              <span class="text-xs font-bold text-ink-900">تفعيل رفيق الشاعر للمتسابقين</span>
+            </label>
+          </div>
+
+          <!-- Usage Stats (Privacy-Safe Aggregates) -->
+          <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div class="manuscript-card rounded-2xl p-4">
+              <p class="text-xs font-semibold text-ink-700/75">محادثات المساعد</p>
+              <p id="aiStatConvos" class="mt-1 text-2xl font-extrabold text-ink-900">0</p>
+            </div>
+            <div class="manuscript-card rounded-2xl p-4">
+              <p class="text-xs font-semibold text-ink-700/75">قصائد التدريب</p>
+              <p id="aiStatPractice" class="mt-1 text-2xl font-extrabold text-oasis-green">0</p>
+            </div>
+            <div class="manuscript-card rounded-2xl p-4">
+              <p class="text-xs font-semibold text-ink-700/75">الأسئلة الشائعة</p>
+              <p id="aiStatFaqs" class="mt-1 text-2xl font-extrabold text-ink-800">0</p>
+            </div>
+            <div class="manuscript-card rounded-2xl p-4">
+              <p class="text-xs font-semibold text-ink-700/75">أسئلة تحتاج مراجعة</p>
+              <p id="aiStatUnanswered" class="mt-1 text-2xl font-extrabold text-oasis-crimson">0</p>
+            </div>
+          </div>
+
+          <!-- Official Competition Info / Announcement Editor -->
+          <div class="manuscript-card rounded-2xl p-5 space-y-4">
+            <h4 class="text-sm font-extrabold text-ink-900">تحديث معلومات المسابقة والإعلانات الرسمية (تُغذّي المساعد مباشرة)</h4>
+            <textarea id="aiOfficialContextInput" rows="3" class="input-manuscript w-full rounded-xl px-4 py-2.5 text-xs sm:text-sm" placeholder="أضف أو حدّث المواعيد، الضوابط، أو أي تنبيه رسمي للمساعد..."></textarea>
+            <button id="saveAiSettingsBtn" type="button" class="rounded-xl bg-ink-900 px-5 py-2 text-xs font-bold text-gold-300 hover:bg-ink-800">
+              حفظ الإعدادات والمعلومات الرسمية
+            </button>
+          </div>
+
+          <!-- Manage Official FAQs -->
+          <div class="manuscript-card rounded-2xl p-5 space-y-4">
+            <h4 class="text-sm font-extrabold text-ink-900">إدارة الأسئلة الشائعة (FAQs)</h4>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <input id="adminFaqQ" type="text" placeholder="السؤال (مثال: هل يشترط الحضور في تشماد؟)" class="input-manuscript rounded-xl px-3.5 py-2 text-xs" />
+              <input id="adminFaqA" type="text" placeholder="الإجابة الرسمية المعتمدة" class="input-manuscript rounded-xl px-3.5 py-2 text-xs" />
+            </div>
+            <button id="addFaqBtn" type="button" class="rounded-xl bg-oasis-green px-4 py-2 text-xs font-bold text-white hover:brightness-110">
+              + إضافة سؤال رسمي
+            </button>
+            <div id="adminFaqList" class="space-y-2 text-xs"></div>
+          </div>
+
+          <!-- Add Daily Challenge / Practice Topic -->
+          <div class="manuscript-card rounded-2xl p-5 space-y-4">
+            <h4 class="text-sm font-extrabold text-ink-900">إضافة تحدٍّ يومي أو موضوع تدريبي</h4>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <input id="adminTopicTitle" type="text" placeholder="عنوان الموضوع (مثال: على ضفاف الفصاحة)" class="input-manuscript rounded-xl px-3.5 py-2 text-xs" />
+              <select id="adminTopicDiff" class="input-manuscript rounded-xl px-3.5 py-2 text-xs">
+                <option value="beginner">مبتدئ (Beginner)</option>
+                <option value="intermediate">متوسط (Intermediate)</option>
+                <option value="advanced">متقدم (Advanced)</option>
+              </select>
+              <input id="adminTopicNote" type="text" placeholder="وصف مختصر للتحدي" class="input-manuscript rounded-xl px-3.5 py-2 text-xs" />
+            </div>
+            <button id="addDailyTopicBtn" type="button" class="rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-gold-300 hover:bg-ink-800">
+              + إضافة إلى مواضيع التدريب والتحدي
+            </button>
+          </div>
+
+          <!-- Unanswered / Escalated Questions Monitor -->
+          <div class="manuscript-card rounded-2xl p-5 space-y-3">
+            <h4 class="text-sm font-extrabold text-ink-900">أسئلة لم يتمكن المساعد من تأكيدها (بدون بيانات شخصية)</h4>
+            <div id="adminUnansweredList" class="space-y-2 text-xs text-ink-800">
+              <p class="text-ink-700/60">لا توجد أسئلة معلّقة.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -629,6 +722,241 @@
         <button id="closeModalBtn" type="button" class="rounded-lg border border-gold-400/45 px-3 py-1 text-xs font-bold text-ink-800 hover:bg-vellum-100">إغلاق</button>
       </div>
       <div id="modalBody" class="space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- Floating رفيق الشاعر (The Poet's Companion) Button -->
+  <button
+    id="openRafeeqBtn"
+    type="button"
+    class="no-print fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full border-2 border-gold-400 bg-ink-900 px-4 py-3 text-gold-300 shadow-2xl transition hover:scale-105 hover:bg-ink-800"
+  >
+    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400 text-ink-950 font-ruqaa text-lg font-bold">ر</span>
+    <span class="text-xs font-extrabold sm:text-sm">رفيق الشاعر</span>
+  </button>
+
+  <!-- رفيق الشاعر (The Poet's Companion) Full Interactive Hub Modal -->
+  <div id="rafeeqModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-ink-950/80 p-2 sm:p-4 backdrop-blur-sm">
+    <div class="manuscript-card relative flex h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl">
+
+      <!-- Modal Header -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold-400/40 bg-ink-900 px-4 py-3 text-vellum-50 sm:px-6">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-gold-400 bg-gold-400/20 font-ruqaa text-2xl font-bold text-gold-300">
+            ر
+          </div>
+          <div>
+            <h2 class="font-ruqaa text-lg font-bold text-gold-300 sm:text-xl">رفيق الشاعر • The Poet's Companion</h2>
+            <p class="text-[11px] text-vellum-200/80">مساعد ذكي لتعلّم الشعر العربي والاستعداد لمسابقة سوق عكاظ (العربية • English • മലയാളം)</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Learning vs Competition Mode Switch -->
+          <div class="flex rounded-xl border border-gold-400/40 bg-ink-950/70 p-0.5 text-[11px] font-bold">
+            <button id="modeLearningBtn" type="button" class="rounded-lg bg-gold-400 px-2.5 py-1 text-ink-950">وضع التعلّم</button>
+            <button id="modeCompetitionBtn" type="button" class="rounded-lg px-2.5 py-1 text-gold-300 hover:bg-ink-800">وضع المسابقة</button>
+          </div>
+          <button id="closeRafeeqBtn" type="button" class="rounded-xl border border-gold-400/40 px-3 py-1.5 text-xs font-bold text-gold-300 hover:bg-ink-800">
+            إغلاق ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- 8-Section Navigation Bar -->
+      <div class="flex items-center gap-1.5 overflow-x-auto border-b border-gold-400/30 bg-vellum-100 px-3 py-2.5 text-xs font-bold">
+        <button type="button" data-rtab="chat" class="rtab-btn shrink-0 rounded-xl bg-ink-900 px-3 py-1.5 text-gold-300">اسأل المساعد</button>
+        <button type="button" data-rtab="learn" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">تعلّم الشعر</button>
+        <button type="button" data-rtab="practice" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">ساحة التدريب</button>
+        <button type="button" data-rtab="vocab" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">باني المفردات</button>
+        <button type="button" data-rtab="topics" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">مولّد المواضيع</button>
+        <button type="button" data-rtab="daily" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">التحدي اليومي</button>
+        <button type="button" data-rtab="progress" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">تقدّمي الشخصي</button>
+        <button type="button" data-rtab="info" class="rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800">معلومات المسابقة</button>
+      </div>
+
+      <!-- Integrity Banner -->
+      <div id="rafeeqModeNotice" class="border-b border-gold-400/25 bg-vellum-50 px-4 py-1.5 text-[11px] font-semibold text-ink-700 text-center">
+        رفيق الشاعر أداة تعليمية وتدريبية — لا يكتب قصائد المسابقة الرسمية نيابةً عن المتسابق.
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+
+        <!-- 1. ASK AI ASSISTANT -->
+        <div id="rtab-chat" class="rtab-panel flex h-full flex-col gap-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" class="suggested-q rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100">ما شروط مسابقة سوق عكاظ؟</button>
+              <button type="button" class="suggested-q rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100" dir="ltr">Explain البحر الكامل simply</button>
+              <button type="button" class="suggested-q rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100" dir="ltr">അറബി കവിതയിലെ التشبيه എന്താണ്?</button>
+            </div>
+            <button id="clearChatBtn" type="button" class="rounded-lg border border-oasis-crimson/35 px-2.5 py-1 text-[11px] font-bold text-oasis-crimson hover:bg-oasis-crimson hover:text-white">
+              مسح المحادثة
+            </button>
+          </div>
+
+          <div id="chatMessagesBox" class="flex-1 min-h-[260px] space-y-3 overflow-y-auto rounded-2xl border border-gold-400/35 bg-white/80 p-4"></div>
+
+          <form id="chatForm" class="flex gap-2">
+            <input id="chatInput" type="text" dir="auto" required placeholder="اسأل بالعربية أو الإنجليزية أو الماليالامية..." class="input-manuscript flex-1 rounded-xl px-4 py-3 text-sm" />
+            <button id="chatSendBtn" type="submit" class="rounded-xl bg-ink-900 px-5 py-3 text-sm font-bold text-gold-300 hover:bg-ink-800 disabled:opacity-50">
+              إرسال
+            </button>
+          </form>
+        </div>
+
+        <!-- 2. LEARN ARABIC POETRY -->
+        <div id="rtab-learn" class="rtab-panel hidden space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-ruqaa text-xl font-bold text-ink-900">أساسيات الشعر العربي والبلاغة والعروض</h3>
+            <div class="flex rounded-xl border border-gold-400/45 bg-white p-0.5 text-xs font-bold">
+              <button type="button" data-learn-lang="ar" class="learn-lang-btn rounded-lg bg-ink-900 px-3 py-1 text-gold-300">العربية</button>
+              <button type="button" data-learn-lang="en" class="learn-lang-btn rounded-lg px-3 py-1 text-ink-800">English</button>
+              <button type="button" data-learn-lang="ml" class="learn-lang-btn rounded-lg px-3 py-1 text-ink-800">മലയാളം</button>
+            </div>
+          </div>
+          <div id="learnTopicsGrid" class="grid grid-cols-1 gap-4 md:grid-cols-2"></div>
+        </div>
+
+        <!-- 3. AI POETRY PRACTICE ARENA -->
+        <div id="rtab-practice" class="rtab-panel hidden space-y-4">
+          <div class="rounded-2xl border border-gold-400/40 bg-vellum-100 p-4 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-ruqaa text-lg font-bold text-ink-900">ساحة التدريب على قرض الشعر</h3>
+              <select id="practiceDifficulty" class="input-manuscript rounded-xl px-3 py-1.5 text-xs font-bold">
+                <option value="beginner">مستوى مبتدئ (Beginner)</option>
+                <option value="intermediate" selected>مستوى متوسط (Intermediate)</option>
+                <option value="advanced">مستوى متقدم (Advanced)</option>
+              </select>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <input id="practiceTopicInput" type="text" value="نور العلم والأمل" class="input-manuscript flex-1 rounded-xl px-3.5 py-2 text-sm font-bold" />
+              <button id="practiceRandomTopicBtn" type="button" class="rounded-xl border border-gold-400/50 bg-white px-3.5 py-2 text-xs font-bold text-ink-800 hover:bg-ink-900 hover:text-gold-300">
+                موضوع عشوائي ↻
+              </button>
+            </div>
+          </div>
+
+          <textarea id="practicePoemInput" rows="5" dir="rtl" placeholder="اكتب أبياتك التدريبية هنا لتقييمها نحوياً وبلاغياً وعروضياً..." class="input-manuscript w-full rounded-2xl px-4 py-3 font-amiri text-lg leading-loose"></textarea>
+
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <p class="text-[11px] text-ink-700/75">ملاحظة: تقييم الذكاء الاصطناعي إرشادي وتعليمي وليس حكماً عروضياً قطعياً.</p>
+            <button id="evaluatePoemBtn" type="button" class="rounded-xl bg-ink-900 px-6 py-2.5 text-sm font-bold text-gold-300 hover:bg-ink-800 disabled:opacity-50">
+              تقييم القصيدة بالذكاء الاصطناعي
+            </button>
+          </div>
+
+          <div id="practiceFeedbackBox" class="hidden rounded-2xl border border-gold-400/45 bg-white p-5 text-sm leading-relaxed space-y-2"></div>
+        </div>
+
+        <!-- 4. ARABIC VOCABULARY BUILDER -->
+        <div id="rtab-vocab" class="rtab-panel hidden space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-ruqaa text-xl font-bold text-ink-900">باني المفردات الشعرية (10 كلمات لكل محور)</h3>
+            <select id="vocabCategorySelect" class="input-manuscript rounded-xl px-4 py-2 text-xs font-bold">
+              <option value="justice">العدل (Justice)</option>
+              <option value="freedom">الحرية (Freedom)</option>
+              <option value="homeland">الوطن (Homeland)</option>
+              <option value="humanity">الإنسانية (Humanity)</option>
+              <option value="knowledge">العلم (Knowledge)</option>
+              <option value="hope">الأمل (Hope)</option>
+              <option value="nature">الطبيعة (Nature)</option>
+            </select>
+          </div>
+          <div id="vocabCardsGrid" class="grid grid-cols-1 gap-3 md:grid-cols-2"></div>
+        </div>
+
+        <!-- 5. RANDOM TOPIC GENERATOR -->
+        <div id="rtab-topics" class="rtab-panel hidden space-y-5 text-center">
+          <h3 class="font-ruqaa text-2xl font-bold text-ink-900">مولّد مواضيع التدريب العشوائية</h3>
+          <div class="flex justify-center gap-2">
+            <button type="button" data-tdiff="beginner" class="tdiff-btn rounded-xl border border-gold-400/45 bg-white px-4 py-2 text-xs font-bold text-ink-800">مبتدئ</button>
+            <button type="button" data-tdiff="intermediate" class="tdiff-btn rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-gold-300">متوسط</button>
+            <button type="button" data-tdiff="advanced" class="tdiff-btn rounded-xl border border-gold-400/45 bg-white px-4 py-2 text-xs font-bold text-ink-800">متقدم</button>
+          </div>
+          <div class="manuscript-dark mx-auto max-w-xl rounded-3xl p-7 text-vellum-50 space-y-3">
+            <p id="genTopicDiffLabel" class="text-xs font-bold text-gold-300">مستوى متوسط</p>
+            <h4 id="genTopicTitle" class="font-ruqaa text-3xl font-bold text-gold-300"></h4>
+            <p id="genTopicHint" class="font-amiri text-lg text-vellum-100/90"></p>
+            <div class="flex flex-wrap justify-center gap-3 pt-2">
+              <button id="newRandomTopicBtn" type="button" class="rounded-full bg-gold-400 px-5 py-2 text-xs font-extrabold text-ink-950 hover:bg-gold-300">توليد موضوع آخر ↻</button>
+              <button id="useGeneratedTopicBtn" type="button" class="rounded-full border border-gold-400/60 px-5 py-2 text-xs font-bold text-gold-300 hover:bg-gold-400/15">تدرّب عليه الآن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. DAILY POET CHALLENGE -->
+        <div id="rtab-daily" class="rtab-panel hidden space-y-5">
+          <div class="manuscript-dark rounded-3xl p-6 text-vellum-50 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="rounded-full bg-gold-400 px-3 py-1 text-xs font-extrabold text-ink-950">تحدي الشاعر اليومي</span>
+              <span id="dailyDurationBadge" class="text-xs font-bold text-gold-300">المدة المقترحة: 15 دقيقة</span>
+            </div>
+            <h3 id="dailyTopicTitle" class="font-ruqaa text-2xl sm:text-3xl font-bold text-gold-300"></h3>
+            <p id="dailyTopicDesc" class="text-sm text-vellum-100/90 leading-relaxed"></p>
+            <p id="dailyPromptTask" class="rounded-xl border border-gold-400/35 bg-ink-950/60 p-3 text-xs text-gold-300"></p>
+          </div>
+          <button id="startDailyPracticeBtn" type="button" class="w-full rounded-xl bg-ink-900 py-3 text-sm font-bold text-gold-300 hover:bg-ink-800">
+            ابدأ كتابة قصيدة التحدي اليومي وتقييمها
+          </button>
+        </div>
+
+        <!-- 7. MY PREPARATION PROGRESS -->
+        <div id="rtab-progress" class="rtab-panel hidden space-y-5">
+          <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div class="rounded-2xl border border-gold-400/40 bg-white p-4 text-center">
+              <p class="text-[11px] font-semibold text-ink-700">جلسات التدريب</p>
+              <p id="progSessions" class="mt-1 text-2xl font-extrabold text-ink-900">0</p>
+            </div>
+            <div class="rounded-2xl border border-gold-400/40 bg-white p-4 text-center">
+              <p class="text-[11px] font-semibold text-ink-700">المواضيع المنجزة</p>
+              <p id="progTopics" class="mt-1 text-2xl font-extrabold text-ink-800">0</p>
+            </div>
+            <div class="rounded-2xl border border-gold-400/40 bg-white p-4 text-center">
+              <p class="text-[11px] font-semibold text-ink-700">القصائد التدريبية</p>
+              <p id="progPoems" class="mt-1 text-2xl font-extrabold text-oasis-green">0</p>
+            </div>
+            <div class="rounded-2xl border border-gold-400/40 bg-white p-4 text-center">
+              <p class="text-[11px] font-semibold text-ink-700">سلسلة الأيام</p>
+              <p id="progStreak" class="mt-1 text-2xl font-extrabold text-gold-600">0</p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-gold-400/40 bg-white p-4 space-y-2">
+            <div class="flex justify-between text-xs font-bold text-ink-900">
+              <span>تقدّم الاستعداد للمسابقة</span>
+              <span id="progPercentLabel">0%</span>
+            </div>
+            <div class="h-3 w-full overflow-hidden rounded-full bg-vellum-200">
+              <div id="progBar" class="h-full bg-oasis-green transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="text-sm font-extrabold text-ink-900">سجل تقييماتك السابقة (خاص بك فقط)</h4>
+            <div id="progHistoryList" class="space-y-2.5 text-xs">
+              <p class="text-ink-700/65">لم ترسل أي قصيدة تدريبية بعد.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. COMPETITION INFORMATION -->
+        <div id="rtab-info" class="rtab-panel hidden space-y-4">
+          <div class="rounded-2xl border border-gold-400/45 bg-white p-5 space-y-2 text-xs sm:text-sm leading-relaxed">
+            <h3 class="font-ruqaa text-xl font-bold text-ink-900">المعلومات الرسمية لمسابقة سوق عكاظ</h3>
+            <p>• <strong>الجهة المنظمة:</strong> قسم اللغة العربية وآدابها، كلية اللغات والآداب، جامعة دار الهدى الإسلامية بتشماد.</p>
+            <p>• <strong>الفئة العمرية:</strong> من 15 إلى 25 سنة لطلبة الكليات الإسلامية.</p>
+            <p>• <strong>المرحلة الأولى (مجانية):</strong> إرسال 10 سطور حول موضوع «على أنقاض العدالة» قبل 30 نوفمبر 2026.</p>
+            <p>• <strong>إعلان الـ 30 متأهلاً:</strong> 5 ديسمبر 2026 — وتُدفع رسوم 50 روبية للمتأهلين فقط عبر تبويب «التأهل والدفع».</p>
+            <p>• <strong>الجولة النهائية:</strong> 20 ديسمبر 2026 في حرم جامعة دار الهدى الإسلامية بتشماد.</p>
+            <p>• <strong>الجوائز:</strong> ₹7001 (عيدروس مسليار) • ₹5001 (زين العلماء) • ₹3001 (بافوتي الحاج).</p>
+            <p>• <strong>التواصل الرسمي:</strong> <span dir="ltr">8590409367 / 90725 84470</span> • <span dir="ltr">arabicdept@dhiu.in</span></p>
+          </div>
+          <div id="publicFaqList" class="space-y-2"></div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -1593,6 +1921,667 @@
       if (window.location.hash === '#admin') switchTab('admin');
       else if (window.location.hash === '#status') switchTab('status');
     });
+
+    // =========================================================================
+    // رفيق الشاعر (THE POET'S COMPANION) — MULTILINGUAL AI & LEARNING HUB
+    // =========================================================================
+    const CANDIDATE_UID_KEY = 'souq_ukaz_candidate_uid';
+    let candidateUid = '';
+    try {
+      candidateUid = localStorage.getItem(CANDIDATE_UID_KEY);
+      if (!candidateUid) {
+        candidateUid = 'cand_' + Math.random().toString(36).slice(2, 10) + '_' + Date.now().toString(36);
+        localStorage.setItem(CANDIDATE_UID_KEY, candidateUid);
+      }
+    } catch (e) {
+      candidateUid = 'cand_' + Date.now().toString(36);
+    }
+
+    const openRafeeqBtn = document.getElementById('openRafeeqBtn');
+    const closeRafeeqBtn = document.getElementById('closeRafeeqBtn');
+    const rafeeqModal = document.getElementById('rafeeqModal');
+    const modeLearningBtn = document.getElementById('modeLearningBtn');
+    const modeCompetitionBtn = document.getElementById('modeCompetitionBtn');
+    const rafeeqModeNotice = document.getElementById('rafeeqModeNotice');
+
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatMessagesBox = document.getElementById('chatMessagesBox');
+    const clearChatBtn = document.getElementById('clearChatBtn');
+
+    const learnTopicsGrid = document.getElementById('learnTopicsGrid');
+    const practiceDifficulty = document.getElementById('practiceDifficulty');
+    const practiceTopicInput = document.getElementById('practiceTopicInput');
+    const practiceRandomTopicBtn = document.getElementById('practiceRandomTopicBtn');
+    const practicePoemInput = document.getElementById('practicePoemInput');
+    const evaluatePoemBtn = document.getElementById('evaluatePoemBtn');
+    const practiceFeedbackBox = document.getElementById('practiceFeedbackBox');
+
+    const vocabCategorySelect = document.getElementById('vocabCategorySelect');
+    const vocabCardsGrid = document.getElementById('vocabCardsGrid');
+
+    const genTopicDiffLabel = document.getElementById('genTopicDiffLabel');
+    const genTopicTitle = document.getElementById('genTopicTitle');
+    const genTopicHint = document.getElementById('genTopicHint');
+    const newRandomTopicBtn = document.getElementById('newRandomTopicBtn');
+    const useGeneratedTopicBtn = document.getElementById('useGeneratedTopicBtn');
+
+    const dailyTopicTitle = document.getElementById('dailyTopicTitle');
+    const dailyTopicDesc = document.getElementById('dailyTopicDesc');
+    const dailyPromptTask = document.getElementById('dailyPromptTask');
+    const dailyDurationBadge = document.getElementById('dailyDurationBadge');
+    const startDailyPracticeBtn = document.getElementById('startDailyPracticeBtn');
+
+    const progSessions = document.getElementById('progSessions');
+    const progTopics = document.getElementById('progTopics');
+    const progPoems = document.getElementById('progPoems');
+    const progStreak = document.getElementById('progStreak');
+    const progPercentLabel = document.getElementById('progPercentLabel');
+    const progBar = document.getElementById('progBar');
+    const progHistoryList = document.getElementById('progHistoryList');
+    const publicFaqList = document.getElementById('publicFaqList');
+
+    // Admin AI elements
+    const adminSubCompBtn = document.getElementById('adminSubCompBtn');
+    const adminSubAiBtn = document.getElementById('adminSubAiBtn');
+    const adminCompPanel = document.getElementById('adminCompPanel');
+    const adminAiPanel = document.getElementById('adminAiPanel');
+    const aiEnabledToggle = document.getElementById('aiEnabledToggle');
+    const aiOfficialContextInput = document.getElementById('aiOfficialContextInput');
+    const saveAiSettingsBtn = document.getElementById('saveAiSettingsBtn');
+    const adminFaqQ = document.getElementById('adminFaqQ');
+    const adminFaqA = document.getElementById('adminFaqA');
+    const addFaqBtn = document.getElementById('addFaqBtn');
+    const adminFaqList = document.getElementById('adminFaqList');
+    const adminTopicTitle = document.getElementById('adminTopicTitle');
+    const adminTopicDiff = document.getElementById('adminTopicDiff');
+    const adminTopicNote = document.getElementById('adminTopicNote');
+    const addDailyTopicBtn = document.getElementById('addDailyTopicBtn');
+    const adminUnansweredList = document.getElementById('adminUnansweredList');
+    const aiStatConvos = document.getElementById('aiStatConvos');
+    const aiStatPractice = document.getElementById('aiStatPractice');
+    const aiStatFaqs = document.getElementById('aiStatFaqs');
+    const aiStatUnanswered = document.getElementById('aiStatUnanswered');
+
+    let rafeeqMode = 'learning';
+    let currentLearnLang = 'ar';
+    let chatHistory = [];
+    let officialFaqs = [];
+    let customTopics = [];
+    let chatbotSettings = {
+      enabled: true,
+      officialContext: 'Souq Ukaz Impromptu Arabic Poetry Competition, Dept. of Arabic Language & Literature, Darul Huda Islamic University, Chemmad. Age: 15-25. Stage 1: Submit 10 lines on "على أنقاض العدالة" by Nov 30, 2026 (free). Top 30 finalists announced Dec 5, 2026. Fee ₹50 only for selected 30 finalists. Final round: Dec 20, 2026 at Darul Huda Campus. Prizes: ₹7001, ₹5001, ₹3001. Contacts: 8590409367, 90725 84470, arabicdept@dhiu.in.'
+    };
+
+    // Educational Lessons (Arabic, English, Malayalam)
+    const LESSONS = [
+      { id: 'intro', arT: 'مقدمة في الشعر العربي', arD: 'الشعر كلام موزون مقفى يعبّر عن المشاعر والمعاني الراقية.', enT: 'Introduction to Arabic Poetry', enD: 'Measured, rhymed Arabic speech expressing noble emotion and imagery.', mlT: 'അറബി കവിതയുടെ ആമുഖം', mlD: 'താളവും പ്രാസവും അർത്ഥഭംഗിയും ചേർന്നതാണ് അറബി കവിത.' },
+      { id: 'trad', arT: 'تقاليد الشعر العربي', arD: 'كان الشعر ديوان العرب؛ يُرتجل في أسواق مثل عكاظ ويدوّن المآثر.', enT: 'Arabic Poetic Traditions', enD: 'Historically recited impromptu at gatherings like Souq Ukaz as the record of Arab heritage.', mlT: 'അറബി കവിതാ പാരമ്പര്യം', mlD: 'സൂഖ് ഉക്കാസ് പോലുള്ള സദസ്സുകളിൽ കവികൾ തത്സമയം കവിതകൾ ആലപിച്ചിരുന്നു.' },
+      { id: 'arud', arT: 'العروض والقوافي', arD: 'علم يضبط أوزان الشعر وتفاعيله لضمان استقامة الإيقاع.', enT: 'Al-Arud & Al-Qawafi (Prosody)', enD: 'The classical science of poetic meter and rhyme patterns.', mlT: 'അറൂളും ഖാഫിയയും', mlD: 'കവിതയുടെ താളവും വൃത്തവും പ്രാസവും നിയന്ത്രിക്കുന്ന ശാസ്ത്രശാഖ.' },
+      { id: 'buhur', arT: 'بحور الشعر', arD: 'ستة عشر بحراً أشهرها: الطويل، الكامل، البسيط، والوافر.', enT: 'Poetic Metres (Buhur)', enD: '16 classical metres such as Al-Tawil, Al-Kamil, Al-Basit, and Al-Wafir.', mlT: 'കവിതാ വൃത്തങ്ങൾ (ബുഹൂർ)', mlD: 'ത്വവീൽ, കാമിൽ, ബസീത്, വാഫിർ തുടങ്ങിയ 16 പ്രധാന അറബി വൃത്തങ്ങൾ.' },
+      { id: 'qafiya', arT: 'القافية والوزن', arD: 'الوزن إيقاع البيت كاملاً، والقافية حروفه الأخيرة التي توحّد الجرس.', enT: 'Rhyme & Rhythm', enD: 'Meter governs the line rhythm while Qafiya unifies the ending sound.', mlT: 'പ്രാസവും താളവും', mlD: 'വരിയുടെ മൊത്തം താളം വസ്നും അവസാന അക്ഷരസാമ്യം ഖാഫിയയുമാണ്.' },
+      { id: 'tashbih', arT: 'التشبيه والاستعارة', arD: 'التشبيه ربط بأداة (كـ/مثل)، والاستعارة تشبيه حُذف أحد طرفيه.', enT: 'Simile & Metaphor', enD: 'Tashbih compares explicitly; Isti’arah borrows qualities directly for vivid imagery.', mlT: 'തശ്ബീഹും ഇസ്തിആറയും', mlD: 'ഉപമയാണ് തശ്ബീഹ്; ഉപമാനത്തെ നേരിട്ട് ആരോപിക്കുന്നത് ഇസ്തിആറ.' },
+      { id: 'imagery', arT: 'الصور الشعرية', arD: 'رسم المعاني المجردة في لوحات حسية يراها القارئ بعين خياله.', enT: 'Poetic Imagery', enD: 'Transforming abstract ideas like justice or hope into vivid sensory scenes.', mlT: 'കാവ്യബിംബങ്ങൾ', mlD: 'നീതി, പ്രതീക്ഷ തുടങ്ങിയ ആശയങ്ങളെ ജീവനുള്ള ചിത്രങ്ങളായി അവതരിപ്പിക്കൽ.' },
+      { id: 'balagha', arT: 'البلاغة العربية', arD: 'مطابقة الكلام لمقتضى الحال مع فصاحة اللفظ وجمال البيان والبديع.', enT: 'Arabic Rhetoric (Balaghah)', enD: 'Eloquent expression uniting Bayan (clarity), Ma’ani (meaning), and Badi’ (ornament).', mlT: 'അറബി അലങ്കാരശാസ്ത്രം (ബലാഗ)', mlD: 'സന്ദർഭത്തിനൊത്ത വ്യക്തവും മനോഹരവുമായ ഭാഷാപ്രയോഗം.' },
+      { id: 'vocab', arT: 'المفردات الشعرية', arD: 'اختيار الألفاظ الجزلة الموحية التي تخدم الجرس والمعنى.', enT: 'Poetic Vocabulary', enD: 'Selecting evocative, rhythmic classical words suited to the poem’s mood.', mlT: 'കാവ്യപദസമ്പത്ത്', mlD: 'കവിതയുടെ ഭാവത്തിനും താളത്തിനും ഇണങ്ങുന്ന ശക്തമായ പദങ്ങൾ തിരഞ്ഞെടുക്കൽ.' },
+      { id: 'irtijal', arT: 'الشعر الارتجالي', arD: 'نظم الأبيات بسرعة بديهة وصدق شعور دون تكلّف في لحظة التحدي.', enT: 'Impromptu Poetry (Irtijal)', enD: 'Composing rhythmic, meaningful Arabic verses spontaneously on a given theme.', mlT: 'തത്സമയ കവിതാരചന', mlD: 'നൽകപ്പെട്ട വിഷയത്തിൽ തത്സമയം താളബോധത്തോടെ കവിത രചിക്കുന്ന കല.' }
+    ];
+
+    // 7 Categories x 10 Words = 70 Curated Vocabulary Entries
+    const VOCAB_BANK = {
+      justice: [
+        ['القِسْطاس', 'നീതിയുടെ തുലാസ്', 'Balance of justice', 'العدل', 'الجَوْر', 'أقامَ القِسطاسَ بين الناس', 'على قِسطاسِ الحقّ تقومُ الأمم'],
+        ['الإنصاف', 'നീതിപൂർവ്വമായ പെരുമാറ്റം', 'Fairness / Equity', 'العدل', 'الظُّلم', 'الإنصافُ شيمةُ الكرام', 'إنصافُ المظلومِ تاجُ المروءة'],
+        ['الجَوْر', 'അനീതി / ക്രൂരത', 'Oppression / Injustice', 'الظلم', 'العدل', 'تأبى النفوسُ الحرةُ الجورَ', 'تحتَ ركامِ الجورِ يولدُ الصبر'],
+        ['البَغي', 'അതിക്രമം', 'Transgression', 'العدوان', 'الرَّحمة', 'لا يدومُ مُلكٌ على البغي', 'انكسرَ سيفُ البغيِ أمامَ الحق'],
+        ['الحَقّ', 'സത്യം / അവകാശം', 'Truth / Right', 'الصِّدق', 'الباطل', 'الحقُّ أبلجُ والباطلُ لجلج', 'سيفُ الحقّ لا يصدأ'],
+        ['المِيزان', 'തുലാസ്', 'Scale / Measure', 'المعيار', 'الاختلال', 'وضعَ الميزانَ بالقسط', 'في ميزانِ الضميرِ تتساوى الهامات'],
+        ['الذِّمّة', 'ഉത്തരവാദിത്തം / സംരക്ഷണം', 'Covenant / Trust', 'العهد', 'الغدر', 'رعى الذمةَ في الحكم', 'في ذمةِ التاريخِ صرخةُ المظلوم'],
+        ['المَظْلِمة', 'അനീതി / പീഡനം', 'Grievance / Wrong', 'الضيم', 'الإنصاف', 'رفعَ المظلمةَ عن الضعيف', 'كم من مظلمةٍ أيقظتْ ضميراً'],
+        ['العِفّة', 'വിശുദ്ധി / ആത്മസംയമനം', 'Integrity / Chastity', 'النزاهة', 'الفجور', 'العفةُ زينةُ القضاة', 'ثوبُ العفةِ أنقى من الديباج'],
+        ['الضَّمير', 'മനസ്സാക്ഷി', 'Conscience', 'الوجدان', 'الغفلة', 'الضميرُ الحيُّ لا ينام', 'نداءُ الضميرِ أصدقُ من الخطب']
+      ],
+      freedom: [
+        ['الحُرِّية', 'സ്വാതന്ത്ര്യം', 'Freedom', 'الانعتاق', 'العبودية', 'الحريةُ فطرةُ الإنسان', 'شمسُ الحريةِ لا تُحجب بغربال'],
+        ['الانعتاق', 'മോചനം', 'Emancipation', 'التحرر', 'الأسر', 'انعتاقُ الروحِ من الخوف', 'فجرُ الانعتاقِ يبددُ الدجى'],
+        ['القَيْد', 'ചങ്ങല / ബന്ധനം', 'Shackle / Chain', 'الأصفاد', 'الطلاقة', 'كسرَ القيدَ بعزيمةٍ صلبة', 'تذوبُ القيودُ إذا نهضَ الأبيّ'],
+        ['الإباء', 'ആത്മാഭിമാനം', 'Pride / Dignity', 'العزة', 'الذل', 'عاشَ على الإباءِ والشرف', 'نفسٌ أبيةٌ لا ترضى الهوان'],
+        ['الكَرامة', 'അന്തസ്സ്', 'Dignity', 'الشرف', 'المهانة', 'الكرامةُ أغلى من الحياة', 'صرحُ الكرامةِ يُبنى بالتضحية'],
+        ['الأُفُق', 'ചക്രവാളം', 'Horizon', 'المدى', 'الضيق', 'حلقَ في الأفقِ الرحيب', 'أفقُ الأحرارِ بلا أسوار'],
+        ['التَّحليق', 'പറന്നുയരൽ', 'Soaring', 'الطيران', 'السقوط', 'التحليقُ في سماءِ الفكر', 'جناحُ الحرّ يعانقُ السحاب'],
+        ['الطَّلاقة', 'സ്വാതന്ത്ര്യബോധം / ഒഴുക്ക്', 'Fluency / Liberty', 'الحرية', 'الانغلاق', 'انطلقَ بروحٍ طليقة', 'طلاقةُ اللسانِ مرآةُ الفكر'],
+        ['الأَغلال', 'വിലങ്ങുകൾ', 'Fetters', 'القيود', 'الانطلاق', 'تكسرتْ الأغلالُ عند الفجر', 'لا تُقيّدُ الأغلالُ فكراً حراً'],
+        ['الشُّموخ', 'ഉന്നതി / പ്രൗഢി', 'Loftiness', 'الرفعة', 'الانكسار', 'شموخُ النخيلِ في وجه الريح', 'بقيَ شموخُه كالطودِ الأشم']
+      ],
+      homeland: [
+        ['المَوطِن', 'ജന്മദേശം', 'Homeland', 'الوطن', 'الغربة', 'أحنُّ إلى موطنِ الصبا', 'ترابُ الموطنِ كُحلُ العيون'],
+        ['الغُربة', 'പ്രവാസം', 'Exile / Estrangement', 'الاغتراب', 'الاستقرار', 'أطالتِ الغربةُ شوقَ المسافر', 'في ليلِ الغربةِ يضيءُ الحنين'],
+        ['الحَنِين', 'ഗൃഹാതുരത്വം / ആഗ്രഹം', 'Longing / Nostalgia', 'الشوق', 'الجفاء', 'أيقظَ النسيمُ حنينَ القلب', 'حنينُ الطيرِ إلى وكوره'],
+        ['الأطلال', 'അവശിഷ്ടങ്ങൾ', 'Ruins / Traces', 'الآثار', 'العمران', 'وقفَ الشاعرُ على الأطلال', 'في الأطلالِ حكايةُ زمنٍ جميل'],
+        ['المَعالم', 'അടയാളങ്ങൾ', 'Landmarks', 'الرموز', 'الطمس', 'حفظَ الوطنُ معالمَ مجده', 'معالمُ الدارِ تنطقُ بالوفاء'],
+        ['الثَّرى', 'ഈറൻ മണ്ണ്', 'Moist Earth / Soil', 'التراب', 'السماء', 'باركَ اللهُ في هذا الثرى', 'نُقبّلُ ثرى الأرضِ الطهور'],
+        ['الوَفاء', 'വിശ്വസ്തത', 'Loyalty', 'الإخلاص', 'الخيانة', 'الوفاءُ للوطنِ عهدٌ باقٍ', 'أهلُ الوفاءِ مصابيحُ الديار'],
+        ['الرُّبوع', 'പ്രദേശങ്ങൾ / താഴ്‌വരകൾ', 'Regions / Quarters', 'الديار', 'القفر', 'أشرقتِ الأنوارُ في تلك الربوع', 'سلامٌ على ربوعِ العلم والأدب'],
+        ['المَلاذ', 'അഭയകേന്ദ്രം', 'Refuge / Haven', 'الملجأ', 'التيه', 'الوطنُ ملاذُ الروحِ المتعبة', 'كنتَ لي الملاذَ حين ضاق المدى'],
+        ['الفِداء', 'ത്യാഗം', 'Sacrifice', 'التضحية', 'الجبن', 'الفداءُ طريقُ المجد', 'أرواحُنا فداءٌ لرفعةِ الديار']
+      ],
+      humanity: [
+        ['الرَّحمة', 'കരുണ', 'Mercy / Compassion', 'الرأفة', 'القسوة', 'الرحمةُ تُنبتُ السلام', 'قلبٌ رحيمٌ يمسحُ دمعةَ الكون'],
+        ['الإخاء', 'സഹോദര്യം', 'Brotherhood', 'الأخوة', 'العداوة', 'عاشوا على الإخاءِ والمودة', 'حبلُ الإخاءِ يجمعُ القلوب'],
+        ['المُروءة', 'ഉത്തമഗുണം / മാന്യത', 'Chivalry / Nobility', 'الشهامة', 'اللؤم', 'المروءةُ إغاثةُ الملهوف', 'تاجُ الفتى صدقٌ ومروءة'],
+        ['الإيثار', 'സ്വയം ത്യാഗം', 'Altruism', 'التضحية', 'الأنانية', 'الإيثارُ أسمى مراتب العطاء', 'علّمَنا الإيثارُ أن نحيا لغيرنا'],
+        ['الوِئام', 'ഐക്യം / സൗഹൃദം', 'Harmony', 'الانسجام', 'الشقاق', 'سادَ الوئامُ بين الجميع', 'في ظلِّ الوئامِ تزهرُ الحياة'],
+        ['الرَّأفة', 'ദയ / അനുകമ്പ', 'Tenderness', 'الشفقة', 'الغلظة', 'أبدى رأفةً باليتيم', 'يدُ الرأفةِ تداوي الجراح'],
+        ['التَّسامُح', 'സഹിഷ്ണുത', 'Tolerance / Forgiveness', 'العفو', 'التعصب', 'التسامحُ لغةُ العقلاء', 'جسرُ التسامحِ يعبرُ الخلافات'],
+        ['النَّخوة', 'ധീരത / അഭിമാനം', 'Magnanimity', 'الشهامة', 'الخذلان', 'استيقظتْ نخوةُ الشرفاء', 'أهلُ النخوةِ يهبّون للنجدة'],
+        ['السَّلام', 'സമാധാനം', 'Peace', 'الأمان', 'الحرب', 'السلامُ غايةُ الإنسان', 'حمامةُ السلامِ تنشدُ الأمان'],
+        ['المَوَدّة', 'സ്നേഹം', 'Affection', 'المحبة', 'البغض', 'المودةُ تُذيبُ الجفاء', 'زرعَ المودةَ في كل قلب']
+      ],
+      knowledge: [
+        ['البَصِيرة', 'ഉൾക്കാഴ്ച', 'Insight', 'الفطنة', 'العمى', 'نورُ البصيرةِ يهدي العقول', 'بصيرةُ العالمِ أشدُّ من البصر'],
+        ['الحِكمة', 'വിജ്ഞാനം / തത്വജ്ഞാനം', 'Wisdom', 'الرشد', 'السفه', 'الحكمةُ ضالةُ المؤمن', 'من ينبوعِ الحكمةِ يرتوي الحكيم'],
+        ['القَلَم', 'തൂലിക', 'Pen', 'اليراع', 'الصمت', 'القلمُ سيفُ المفكرين', 'صريرُ القلمِ يخلّدُ الأفكار'],
+        ['المِداد', 'മഷി', 'Ink', 'الحبر', 'المحو', 'مدادُ العلماءِ نورُ الأجيال', 'كتبَ بمدادِ الصدقِ والتقوى'],
+        ['النِّبراس', 'വിളക്ക് / മാർഗ്ഗദർശി', 'Lantern / Beacon', 'المصباح', 'الظلام', 'العلمُ نبراسُ الحياة', 'أنتَ للطلابِ نبراسُ الهدى'],
+        ['التَّفكُّر', 'ചിന്ത / ധ്യാനം', 'Contemplation', 'التأمل', 'الغفلة', 'التفكرُ مفتاحُ المعرفة', 'في التفكرِ تنكشفُ الأسرار'],
+        ['الرُّشد', 'സന്മാർഗ്ഗം / പക്വത', 'Guidance / Maturity', 'الهداية', 'الغواية', 'سلكَ طريقَ الرشد', 'كلمةُ الرشدِ تُنير الدرب'],
+        ['المَعرفة', 'അറിവ്', 'Knowledge', 'العلم', 'الجهل', 'المعرفةُ بحرٌ لا ساحل له', 'شمسُ المعرفةِ تبدّدُ الجهل'],
+        ['اليَقين', 'ദൃഢവിശ്വാസം', 'Certainty', 'الثبات', 'الشك', 'وصلَ إلى بردِ اليقين', 'صرحُ اليقينِ لا تهزّه الرياح'],
+        ['المِحراب', 'പ്രാർത്ഥനാ മണ്ഡപം', 'Sanctuary / Niche', 'المقام', 'اللهو', 'في محرابِ العلمِ يصفو الذهن', 'محرابُ الأدبِ يجمعُ البلغاء']
+      ],
+      hope: [
+        ['السَّنا', 'പ്രകാശം / തിളക്കം', 'Radiance / Light', 'الضياء', 'العتمة', 'أشرقَ سنا الفجرِ الجديد', 'سنا الأملِ يبدّدُ اليأس'],
+        ['التَّفاؤل', 'ശുഭാപ്തിവിശ്വാസം', 'Optimism', 'الرجاء', 'التشاؤم', 'التفاؤلُ وقودُ الساعين', 'بعينِ التفاؤلِ نرى الغدَ أجمل'],
+        ['البُشرى', 'സന്തോഷവാർത്ത', 'Glad tidings', 'البشارة', 'النذير', 'جاءتِ البشرى بعد طول انتظار', 'نسائمُ البشرى تهبُّ مع السحر'],
+        ['البَصيص', 'നേരിയ വെളിച്ചം', 'Glimmer', 'الوميض', 'الظلمة', 'لمعَ بصيصُ أملٍ في الأفق', 'بصيصُ نورٍ يكفي لهدايةِ تائه'],
+        ['الغَد', 'നാളെ / ഭാവി', 'Tomorrow', 'المستقبل', 'الأمس', 'نعملُ لغدٍ أكثر إشراقاً', 'في كفِّ الغدِ أزهارُ الرجاء'],
+        ['العَزْم', 'ദൃഢനിശ്ചയം', 'Determination', 'الإرادة', 'التردد', 'بالعزمِ تذوبُ الصعاب', 'إذا صدقَ العزمُ وضحَ السبيل'],
+        ['الإشراق', 'ഉദയം / പ്രഭ', 'Sunrise / Radiance', 'التألق', 'الأفول', 'إشراقُ الروحِ سرُّ السعادة', 'كلُّ ليلٍ يعقبه إشراق'],
+        ['الرَّجاء', 'പ്രതീക്ഷ', 'Hope', 'الأمل', 'القنوط', 'لا ينقطعُ الرجاءُ بالله', 'شراعُ الرجاءِ يبحرُ رغم الموج'],
+        ['الفَجر', 'പുലരി', 'Dawn', 'الصبح', 'الغسق', 'تنفّسَ الفجرُ بالأماني', 'بعدَ كلِّ عتمةٍ فجرٌ باسم'],
+        ['الطُّموح', 'അഭിലാഷം', 'Ambition', 'التطلع', 'الخمول', 'طموحُ الشبابِ يصنعُ المجد', 'نحو العلا يسيرُ ذو الطموح']
+      ],
+      nature: [
+        ['النَّسيم', 'ഇളംകാറ്റ്', 'Gentle Breeze', 'النسيم العليل', 'العاصفة', 'هبَّ النسيمُ عند الفجر', 'حملَ النسيمُ عطرَ الخزامى'],
+        ['السَّدَف', 'അസ്തമയ/പ്രഭാത വെളിച്ചം', 'Twilight / Dawn glow', 'الغسق', 'الضحى', 'تأملَ الشاعرُ سدفَ المساء', 'في السدفِ تتعانقُ الظلال'],
+        ['الرَّوض', 'പൂന്തോട്ടം', 'Meadow / Garden', 'البستان', 'الصحراء', 'تفتّحتْ أزهارُ الروض', 'غردَ الطيرُ في الروضِ النضير'],
+        ['الغَمام', 'മേഘം', 'Clouds', 'السحاب', 'الصحو', 'تجمّعَ الغمامُ يبشّرُ بالغيث', 'ظلَّ الغمامُ رؤوسَ السائرين'],
+        ['الشَّفق', 'സന്ധ്യാശോഭ', 'Twilight Glow', 'الحمرة', 'الدجى', 'تلوّنَ الأفقُ بلونِ الشفق', 'لوحةُ الشفقِ تبهرُ الشعراء'],
+        ['الغَيث', 'അനുഗ്രഹീത മഴ', 'Abundant Rain', 'المطر', 'الجفاف', 'أحيا الغيثُ الأرضَ الموات', 'كأنَّ شعرَهُ غيثٌ على بيداء'],
+        ['الأيك', 'ഇടതൂർന്ന മരക്കൂട്ടം', 'Thicket / Grove', 'الشجر الملتف', 'القفر', 'شدتِ الحمائمُ فوقَ الأيك', 'في ظلالِ الأيكِ يطيبُ الشعر'],
+        ['الكَوْكب', 'നക്ഷത്രം / ഗ്രഹം', 'Star / Planet', 'النجم', 'الأفول', 'تلالأ الكوكبُ في كبد السماء', 'كواكبُ الليلِ سميرُ الساهرين'],
+        ['السَّحَر', 'പുലർച്ചെ', 'Pre-dawn', 'آخر الليل', 'الهاجرة', 'ساعاتُ السحرِ ميعادُ الصفاء', 'في السحرِ تنسابُ القوافي'],
+        ['العَبَق', 'സുഗന്ധം', 'Fragrance', 'الأريج', 'النتن', 'فاحَ عبقُ الوردِ في الدار', 'عبقُ الفصاحةِ يفوحُ من أبياته']
+      ]
+    };
+
+    const TOPIC_POOL = {
+      beginner: [
+        { title: 'صباحُ الأمل في حرم العلم', hint: 'صف شعور طالب العلم وهو يستقبل الصباح في كليته.' },
+        { title: 'شكرُ المعلم والكتاب', hint: 'عبّر في أربعة أبيات عن فضل المعلم ونور القراءة.' },
+        { title: 'نسيمُ الفجر في القرية', hint: 'ارسم صورة جميلة للطبيعة الهادئة عند شروق الشمس.' }
+      ],
+      intermediate: [
+        { title: 'حوارٌ بين القلم والورقة', hint: 'تخيّل القلم يشكو صمتَ الزمن والورقة تردّ عليه بالأمل.' },
+        { title: 'لغةُ الضاد بين الماضي والمستقبل', hint: 'تحدّث عن عراقة اللغة العربية ودور الشباب في إحيائها.' },
+        { title: 'على شاطئ الصبر والإباء', hint: 'اجمع بين صورة البحر الهائج وثبات الإنسان المؤمن.' }
+      ],
+      advanced: [
+        { title: 'على أنقاض العدالة (موضوع تدريبي موازٍ)', hint: 'تصوّر مدينةً تبحث عن ميزانها الضائع، دون كتابة قصيدة المسابقة نفسها.' },
+        { title: 'فلسفةُ الوقت في مرايا الأندلس', hint: 'تأمل تعاقب الحضارات بلغة رمزية عالية وصور مركبة.' },
+        { title: 'صرخةُ الضمير في زمن الصمت', hint: 'وظّف الطباق والاستعارة المكنية في خمسة أبيات مهيبة.' }
+      ]
+    };
+
+    const DAILY_CHALLENGES = [
+      { title: 'نورُ الكلمة الصادقة', desc: 'تدرّب على قوة الكلمة وأثرها في بناء القلوب والأمم.', task: 'اكتب 4 أبيات تستخدم فيها تشبيهاً واحداً على الأقل ومفردة «النبراس».', duration: '15 دقيقة' },
+      { title: 'وقفةٌ عند أطلال الوفاء', desc: 'استلهم مطالع الشعراء الكلاسيكيين بأسلوب عصري رصين.', task: 'اكتب 4 إلى 6 أبيات تبدأ بالنداء أو الاستفهام البلاغي.', duration: '20 دقيقة' },
+      { title: 'نشيدُ الأمل بعد العاصفة', desc: 'حوّل مشاهد الطبيعة (الغمام، الغيث، الفجر) إلى رمز للتفاؤل.', task: 'اكتب 5 أبيات تلتزم فيها بقافية موحدة.', duration: '15 دقيقة' },
+      { title: 'مناجاةُ القلم في جوف الليل', desc: 'تحدّي الارتجال السريع: عبّر عن علاقة الشاعر بقلمه.', task: 'اضبط مؤقتاً لـ 10 دقائق واكتب 4 أبيات مترابطة.', duration: '10 دقائق' }
+    ];
+
+    // Open / Close Modal
+    openRafeeqBtn.addEventListener('click', () => {
+      if (!chatbotSettings.enabled) {
+        showToast('تم إيقاف رفيق الشاعر مؤقتاً من قِبل الإدارة');
+        return;
+      }
+      rafeeqModal.classList.remove('hidden');
+      renderLearnTopics();
+      renderVocabCards();
+      renderDailyChallenge();
+      renderProgressDashboard();
+      renderRandomTopic('intermediate');
+      if (!chatMessagesBox.children.length) {
+        appendChatBubble('model', 'أهلاً بك في «رفيق الشاعر»! يمكنك سؤالي بالعربية أو الإنجليزية أو الماليالامية عن الشعر العربي أو شروط مسابقة سوق عكاظ، أو البدء في ساحة التدريب.');
+      }
+    });
+
+    closeRafeeqBtn.addEventListener('click', () => rafeeqModal.classList.add('hidden'));
+
+    // Mode Switch
+    function setRafeeqMode(mode) {
+      rafeeqMode = mode;
+      if (mode === 'learning') {
+        modeLearningBtn.className = 'rounded-lg bg-gold-400 px-2.5 py-1 text-ink-950';
+        modeCompetitionBtn.className = 'rounded-lg px-2.5 py-1 text-gold-300 hover:bg-ink-800';
+        rafeeqModeNotice.textContent = 'وضع التعلّم: شرح البلاغة والعروض والمفردات وتقييم قصائد التدريب (لا يكتب قصيدة المسابقة الرسمية).';
+      } else {
+        modeCompetitionBtn.className = 'rounded-lg bg-gold-400 px-2.5 py-1 text-ink-950';
+        modeLearningBtn.className = 'rounded-lg px-2.5 py-1 text-gold-300 hover:bg-ink-800';
+        rafeeqModeNotice.textContent = 'وضع المسابقة: إجابات رسمية فقط حول القوانين والمواعيد والجوائز — يُمنع توليد نصوص للتقديم الرسمي.';
+      }
+    }
+    modeLearningBtn.addEventListener('click', () => setRafeeqMode('learning'));
+    modeCompetitionBtn.addEventListener('click', () => setRafeeqMode('competition'));
+
+    // Section Tabs inside Modal
+    function openRafeeqTab(tabName) {
+      document.querySelectorAll('.rtab-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('rtab-' + tabName).classList.remove('hidden');
+      document.querySelectorAll('.rtab-btn').forEach(b => {
+        b.className = b.dataset.rtab === tabName
+          ? 'rtab-btn shrink-0 rounded-xl bg-ink-900 px-3 py-1.5 text-gold-300'
+          : 'rtab-btn shrink-0 rounded-xl border border-gold-400/40 bg-white px-3 py-1.5 text-ink-800';
+      });
+    }
+    document.querySelectorAll('.rtab-btn').forEach(b => b.addEventListener('click', () => openRafeeqTab(b.dataset.rtab)));
+
+    // 1. Chat Helpers
+    function appendChatBubble(role, text, isError = false) {
+      const wrap = document.createElement('div');
+      wrap.className = role === 'user' ? 'flex justify-start' : 'flex justify-end';
+      const bubble = document.createElement('div');
+      bubble.setAttribute('dir', 'auto');
+      bubble.className = isError
+        ? 'max-w-[85%] rounded-2xl border border-oasis-crimson/40 bg-oasis-crimson/10 px-4 py-2.5 text-xs sm:text-sm text-oasis-crimson whitespace-pre-wrap'
+        : role === 'user'
+          ? 'max-w-[85%] rounded-2xl bg-ink-900 px-4 py-2.5 text-xs sm:text-sm text-gold-300 whitespace-pre-wrap'
+          : 'max-w-[85%] rounded-2xl border border-gold-400/40 bg-vellum-50 px-4 py-2.5 text-xs sm:text-sm text-ink-900 whitespace-pre-wrap leading-relaxed';
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      chatMessagesBox.appendChild(wrap);
+      chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
+    }
+
+    async function callPoetApi(payload) {
+      const res = await fetch('/api/poet-assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = data.message || `Server returned ${res.status}`;
+        const err = new Error(msg);
+        err.code = data.error || 'API_ERROR';
+        throw err;
+      }
+      return data.reply;
+    }
+
+    async function sendChatMessage(text) {
+      if (!text.trim()) return;
+      appendChatBubble('user', text);
+      chatInput.value = '';
+      chatSendBtn.disabled = true;
+      chatSendBtn.textContent = '...';
+
+      // Save user message to Firestore
+      if (isFirebaseConfigured && db) {
+        try {
+          await addDoc(collection(db, 'chatbot_messages'), {
+            candidateUid, role: 'user', text, mode: rafeeqMode, createdAtMs: Date.now()
+          });
+        } catch (e) {}
+      }
+
+      const faqContext = officialFaqs.map(f => `Q: ${f.q} | A: ${f.a}`).join('\n');
+      const fullOfficialContext = chatbotSettings.officialContext + (faqContext ? '\nOFFICIAL FAQS:\n' + faqContext : '');
+
+      try {
+        const reply = await callPoetApi({
+          action: 'chat',
+          mode: rafeeqMode,
+          message: text,
+          history: chatHistory,
+          officialContext: fullOfficialContext
+        });
+        chatHistory.push({ role: 'user', text }, { role: 'model', text: reply });
+        appendChatBubble('model', reply);
+
+        if (isFirebaseConfigured && db) {
+          const isUnanswered = /contact the organizers|8590409367|تواصل مع المنظمين/i.test(reply);
+          await addDoc(collection(db, 'chatbot_messages'), {
+            candidateUid, role: 'model', text: reply, questionText: text, unanswered: isUnanswered, createdAtMs: Date.now()
+          });
+        }
+      } catch (err) {
+        appendChatBubble('model', `تعذر الاتصال بالخادم الذكي (${err.code || 'OFFLINE'}): ${err.message}`, true);
+      } finally {
+        chatSendBtn.disabled = false;
+        chatSendBtn.textContent = 'إرسال';
+      }
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendChatMessage(chatInput.value);
+    });
+
+    document.querySelectorAll('.suggested-q').forEach(btn => {
+      btn.addEventListener('click', () => sendChatMessage(btn.textContent));
+    });
+
+    clearChatBtn.addEventListener('click', () => {
+      chatHistory = [];
+      chatMessagesBox.innerHTML = '';
+      appendChatBubble('model', 'تم مسح المحادثة. كيف أساعدك الآن؟');
+    });
+
+    // 2. Learn Poetry
+    function renderLearnTopics() {
+      learnTopicsGrid.innerHTML = LESSONS.map(l => {
+        const title = currentLearnLang === 'ar' ? l.arT : currentLearnLang === 'en' ? l.enT : l.mlT;
+        const desc = currentLearnLang === 'ar' ? l.arD : currentLearnLang === 'en' ? l.enD : l.mlD;
+        const dirAttr = currentLearnLang === 'ar' ? 'rtl' : 'ltr';
+        return `
+          <div dir="${dirAttr}" class="rounded-2xl border border-gold-400/40 bg-white p-4 space-y-2 shadow-sm">
+            <h4 class="text-sm font-extrabold text-ink-900">${escapeHtml(title)}</h4>
+            <p class="text-xs text-ink-800/80 leading-relaxed">${escapeHtml(desc)}</p>
+            <button type="button" data-ask-lesson="${escapeHtml(l.arT)}" class="ask-lesson-btn text-[11px] font-bold text-ink-700 underline hover:text-ink-900">
+              ${currentLearnLang === 'ar' ? 'اطلب مثالاً وشرحاً أعمق ✦' : currentLearnLang === 'en' ? 'Ask AI for an example ✦' : 'ഉദാഹരണം ചോദിക്കുക ✦'}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.querySelectorAll('.learn-lang-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        currentLearnLang = b.dataset.learnLang;
+        document.querySelectorAll('.learn-lang-btn').forEach(x => {
+          x.className = x.dataset.learnLang === currentLearnLang ? 'learn-lang-btn rounded-lg bg-ink-900 px-3 py-1 text-gold-300' : 'learn-lang-btn rounded-lg px-3 py-1 text-ink-800';
+        });
+        renderLearnTopics();
+      });
+    });
+
+    learnTopicsGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ask-lesson-btn');
+      if (!btn) return;
+      const topic = btn.dataset.askLesson;
+      openRafeeqTab('chat');
+      const promptMap = {
+        ar: `اشرح لي «${topic}» بأسلوب مبسط مع مثال شعري واضح.`,
+        en: `Explain "${topic}" in simple English with a classic Arabic poetry example.`,
+        ml: `"${topic}" എന്നതിനെക്കുറിച്ച് ലളിതമായ മലയാളത്തിൽ ഒരു ഉദാഹരണത്തോടെ വിശദീകരിക്കുക.`
+      };
+      sendChatMessage(promptMap[currentLearnLang]);
+    });
+
+    // 3. Practice Arena & Progress Persistence
+    function getLocalProgress() {
+      try { return JSON.parse(localStorage.getItem('rafeeq_progress_' + candidateUid) || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalProgress(entry) {
+      try {
+        const list = getLocalProgress();
+        list.unshift(entry);
+        localStorage.setItem('rafeeq_progress_' + candidateUid, JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    practiceRandomTopicBtn.addEventListener('click', () => {
+      const diff = practiceDifficulty.value;
+      const pool = [...TOPIC_POOL[diff], ...customTopics.filter(t => t.difficulty === diff)];
+      const pick = pool[Math.floor(Math.random() * pool.length)];
+      if (pick) practiceTopicInput.value = pick.title;
+    });
+
+    evaluatePoemBtn.addEventListener('click', async () => {
+      const poem = practicePoemInput.value.trim();
+      const topic = practiceTopicInput.value.trim();
+      const diff = practiceDifficulty.value;
+      if (poem.length < 10) {
+        showToast('اكتب بيتاً شعرياً واحداً على الأقل للتقييم');
+        return;
+      }
+      evaluatePoemBtn.disabled = true;
+      evaluatePoemBtn.textContent = 'جارٍ التقييم الأدبي...';
+      practiceFeedbackBox.classList.add('hidden');
+
+      try {
+        const feedback = await callPoetApi({
+          action: 'evaluate',
+          mode: 'learning',
+          poem,
+          topic,
+          difficulty: diff
+        });
+        practiceFeedbackBox.textContent = feedback;
+        practiceFeedbackBox.setAttribute('dir', 'auto');
+        practiceFeedbackBox.classList.remove('hidden');
+
+        const entry = {
+          candidateUid,
+          topic,
+          difficulty: diff,
+          poem,
+          feedback,
+          dateKey: new Date().toISOString().slice(0, 10),
+          createdAtMs: Date.now()
+        };
+        saveLocalProgress(entry);
+
+        if (isFirebaseConfigured && db) {
+          await addDoc(collection(db, 'poetry_practice_submissions'), entry);
+          await addDoc(collection(db, 'poetry_feedback'), { candidateUid, topic, feedback, createdAtMs: Date.now() });
+        }
+        renderProgressDashboard();
+      } catch (err) {
+        practiceFeedbackBox.textContent = `تعذر تقييم القصيدة (${err.code || 'OFFLINE'}): ${err.message}`;
+        practiceFeedbackBox.classList.remove('hidden');
+      } finally {
+        evaluatePoemBtn.disabled = false;
+        evaluatePoemBtn.textContent = 'تقييم القصيدة بالذكاء الاصطناعي';
+      }
+    });
+
+    // 4. Vocabulary Builder
+    function renderVocabCards() {
+      const cat = vocabCategorySelect.value;
+      const words = VOCAB_BANK[cat] || [];
+      vocabCardsGrid.innerHTML = words.map(([w, ml, en, syn, ant, ex, expr]) => `
+        <div class="rounded-2xl border border-gold-400/40 bg-white p-4 space-y-1.5 text-xs shadow-sm">
+          <div class="flex items-center justify-between border-b border-vellum-200 pb-1.5">
+            <span class="font-amiri text-xl font-bold text-ink-900">${escapeHtml(w)}</span>
+            <span class="font-semibold text-ink-700" dir="ltr">${escapeHtml(en)} • ${escapeHtml(ml)}</span>
+          </div>
+          <p><strong>المرادف:</strong> ${escapeHtml(syn)} | <strong>الضد:</strong> ${escapeHtml(ant)}</p>
+          <p class="text-ink-800"><strong>مثال:</strong> ${escapeHtml(ex)}</p>
+          <p class="font-amiri text-sm text-oasis-green">✦ ${escapeHtml(expr)}</p>
+        </div>
+      `).join('');
+    }
+    vocabCategorySelect.addEventListener('change', renderVocabCards);
+
+    // 5. Random Topic Generator
+    let activeTopicDiff = 'intermediate';
+    function renderRandomTopic(diff) {
+      activeTopicDiff = diff;
+      const pool = [...TOPIC_POOL[diff], ...customTopics.filter(t => t.difficulty === diff)];
+      const pick = pool[Math.floor(Math.random() * pool.length)];
+      const labels = { beginner: 'مستوى مبتدئ', intermediate: 'مستوى متوسط', advanced: 'مستوى متقدم' };
+      genTopicDiffLabel.textContent = labels[diff];
+      genTopicTitle.textContent = pick ? pick.title : 'نور العلم';
+      genTopicHint.textContent = pick ? (pick.hint || pick.note || '') : '';
+    }
+    document.querySelectorAll('.tdiff-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.tdiff-btn').forEach(x => {
+          x.className = x.dataset.tdiff === b.dataset.tdiff ? 'tdiff-btn rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-gold-300' : 'tdiff-btn rounded-xl border border-gold-400/45 bg-white px-4 py-2 text-xs font-bold text-ink-800';
+        });
+        renderRandomTopic(b.dataset.tdiff);
+      });
+    });
+    newRandomTopicBtn.addEventListener('click', () => renderRandomTopic(activeTopicDiff));
+    useGeneratedTopicBtn.addEventListener('click', () => {
+      practiceDifficulty.value = activeTopicDiff;
+      practiceTopicInput.value = genTopicTitle.textContent;
+      openRafeeqTab('practice');
+    });
+
+    // 6. Daily Poet Challenge
+    function renderDailyChallenge() {
+      const dayOfYear = Math.floor(Date.now() / 86400000);
+      const ch = DAILY_CHALLENGES[dayOfYear % DAILY_CHALLENGES.length];
+      dailyTopicTitle.textContent = ch.title;
+      dailyTopicDesc.textContent = ch.desc;
+      dailyPromptTask.textContent = 'المطلوب اليوم: ' + ch.task;
+      dailyDurationBadge.textContent = 'المدة المقترحة: ' + ch.duration;
+    }
+    startDailyPracticeBtn.addEventListener('click', () => {
+      practiceTopicInput.value = dailyTopicTitle.textContent;
+      openRafeeqTab('practice');
+    });
+
+    // 7. Personal Practice Tracker (Candidate-Scoped)
+    function renderProgressDashboard() {
+      const list = getLocalProgress();
+      const uniqueTopics = new Set(list.map(x => x.topic));
+      const uniqueDays = new Set(list.map(x => x.dateKey));
+      progSessions.textContent = list.length;
+      progTopics.textContent = uniqueTopics.size;
+      progPoems.textContent = list.length;
+      progStreak.textContent = uniqueDays.size;
+
+      const pct = Math.min(100, list.length * 10);
+      progPercentLabel.textContent = pct + '%';
+      progBar.style.width = pct + '%';
+
+      if (!list.length) {
+        progHistoryList.innerHTML = '<p class="text-ink-700/65">لم ترسل أي قصيدة تدريبية بعد.</p>';
+        return;
+      }
+      progHistoryList.innerHTML = list.slice(0, 10).map(item => `
+        <div class="rounded-xl border border-gold-400/35 bg-white p-3 space-y-1">
+          <div class="flex justify-between font-bold text-ink-900">
+            <span>${escapeHtml(item.topic)}</span>
+            <span class="font-mono text-[10px] text-ink-700">${escapeHtml(item.dateKey)}</span>
+          </div>
+          <p class="text-[11px] text-ink-800/80 whitespace-pre-wrap">${escapeHtml((item.feedback || '').slice(0, 220))}...</p>
+        </div>
+      `).join('');
+    }
+
+    // 8. Admin AI Management Panel & Live Firestore Sync
+    adminSubCompBtn.addEventListener('click', () => {
+      adminCompPanel.classList.remove('hidden');
+      adminAiPanel.classList.add('hidden');
+      adminSubCompBtn.className = 'rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-gold-300 shadow-sm';
+      adminSubAiBtn.className = 'rounded-xl border border-gold-400/50 bg-vellum-50 px-4 py-2 text-xs font-bold text-ink-800 hover:bg-vellum-100';
+    });
+
+    adminSubAiBtn.addEventListener('click', () => {
+      adminCompPanel.classList.add('hidden');
+      adminAiPanel.classList.remove('hidden');
+      adminSubAiBtn.className = 'rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-gold-300 shadow-sm';
+      adminSubCompBtn.className = 'rounded-xl border border-gold-400/50 bg-vellum-50 px-4 py-2 text-xs font-bold text-ink-800 hover:bg-vellum-100';
+      loadAdminAiData();
+    });
+
+    async function loadPublicAiConfig() {
+      if (!isFirebaseConfigured || !db) return;
+      try {
+        const faqSnap = await getDocs(collection(db, 'chatbot_faqs'));
+        officialFaqs = faqSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        publicFaqList.innerHTML = officialFaqs.map(f => `
+          <div class="rounded-xl border border-gold-400/35 bg-white p-3 text-xs space-y-1">
+            <p class="font-bold text-ink-900">${escapeHtml(f.q)}</p>
+            <p class="text-ink-800/80">${escapeHtml(f.a)}</p>
+          </div>
+        `).join('');
+
+        const topicSnap = await getDocs(collection(db, 'poetry_topics'));
+        customTopics = topicSnap.docs.map(d => d.data());
+      } catch (e) {}
+    }
+
+    async function loadAdminAiData() {
+      if (!isFirebaseConfigured || !db) return;
+      try {
+        await loadPublicAiConfig();
+        aiOfficialContextInput.value = chatbotSettings.officialContext;
+        aiStatFaqs.textContent = officialFaqs.length;
+        adminFaqList.innerHTML = officialFaqs.map(f => `
+          <div class="flex items-center justify-between gap-2 rounded-xl border border-gold-400/30 bg-vellum-50 px-3 py-2">
+            <div><p class="font-bold">${escapeHtml(f.q)}</p><p class="text-ink-700">${escapeHtml(f.a)}</p></div>
+            <button type="button" data-del-faq="${escapeHtml(f.id)}" class="rounded-lg bg-oasis-crimson/10 px-2.5 py-1 text-[11px] font-bold text-oasis-crimson">حذف</button>
+          </div>
+        `).join('');
+
+        const msgSnap = await getDocs(collection(db, 'chatbot_messages'));
+        aiStatConvos.textContent = msgSnap.size;
+        const unanswered = [];
+        msgSnap.forEach(d => { const v = d.data(); if (v.unanswered && v.questionText) unanswered.push(v.questionText); });
+        aiStatUnanswered.textContent = unanswered.length;
+        adminUnansweredList.innerHTML = unanswered.length
+          ? unanswered.slice(0, 15).map(q => `<div class="rounded-lg border border-gold-400/30 bg-vellum-50 px-3 py-2">${escapeHtml(q)}</div>`).join('')
+          : '<p class="text-ink-700/60">لا توجد أسئلة معلّقة.</p>';
+
+        const pracSnap = await getDocs(collection(db, 'poetry_practice_submissions'));
+        aiStatPractice.textContent = pracSnap.size;
+      } catch (e) {}
+    }
+
+    saveAiSettingsBtn.addEventListener('click', async () => {
+      chatbotSettings.enabled = aiEnabledToggle.checked;
+      chatbotSettings.officialContext = aiOfficialContextInput.value.trim() || chatbotSettings.officialContext;
+      if (isFirebaseConfigured && db) {
+        await addDoc(collection(db, 'chatbot_settings'), { ...chatbotSettings, updatedAtMs: Date.now() });
+      }
+      showToast('تم حفظ إعدادات رفيق الشاعر');
+    });
+
+    addFaqBtn.addEventListener('click', async () => {
+      const q = adminFaqQ.value.trim();
+      const a = adminFaqA.value.trim();
+      if (!q || !a) { showToast('أدخل السؤال والإجابة'); return; }
+      if (isFirebaseConfigured && db) {
+        await addDoc(collection(db, 'chatbot_faqs'), { q, a, createdAtMs: Date.now() });
+        adminFaqQ.value = '';
+        adminFaqA.value = '';
+        await loadAdminAiData();
+        showToast('تمت إضافة السؤال الرسمي');
+      }
+    });
+
+    adminFaqList.addEventListener('click', async (e) => {
+      const btn = e.target.closest('button[data-del-faq]');
+      if (!btn || !isFirebaseConfigured || !db) return;
+      await deleteDoc(doc(db, 'chatbot_faqs', btn.dataset.delFaq));
+      await loadAdminAiData();
+      showToast('تم حذف السؤال');
+    });
+
+    addDailyTopicBtn.addEventListener('click', async () => {
+      const title = adminTopicTitle.value.trim();
+      const difficulty = adminTopicDiff.value;
+      const note = adminTopicNote.value.trim();
+      if (!title) { showToast('أدخل عنوان الموضوع'); return; }
+      if (isFirebaseConfigured && db) {
+        await addDoc(collection(db, 'poetry_topics'), { title, difficulty, note, createdAtMs: Date.now() });
+        adminTopicTitle.value = '';
+        adminTopicNote.value = '';
+        await loadPublicAiConfig();
+        showToast('تمت إضافة الموضوع التدريبي');
+      }
+    });
+
+    loadPublicAiConfig();
   </script>
 </body>
 </html>
