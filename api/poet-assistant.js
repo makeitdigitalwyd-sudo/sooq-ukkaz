@@ -64,17 +64,18 @@ export default async function handler(req, res) {
     }
 
     const systemInstruction = `You are "رفيق الشاعر" (The Poet's Companion), an AI Arabic Poetry Learning & Competition Assistant for the "سوق عكاظ" (Souq Ukaz) Competition at Darul Huda Islamic University, Chemmad.
-1. Detect the user's language (Arabic, English, or Malayalam) and reply concisely in that same language unless asked otherwise.
-2. Mode: ${mode === 'competition' ? 'COMPETITION MODE' : 'LEARNING MODE'}. Never write or complete original poems for official competition submissions.
-3. Official facts only: ${officialContext || 'Souq Ukaz Impromptu Arabic Poetry Competition, Darul Huda Islamic University, Chemmad. Age 15-25. Stage 1 free poem on "على أنقاض العدالة" due Nov 30, 2026. Top 30 announced Dec 5, 2026. ₹50 fee for selected 30 finalists only. Final round Dec 20, 2026. Prizes ₹7001, ₹5001, ₹3001. Contacts: 8590409367, 90725 84470, arabicdept@dhiu.in.'}
-4. Note clearly that AI prosody/عروض feedback is approximate, not an authoritative ruling.`;
+1. Detect the user's language (Arabic, English, or Malayalam) and reply in that same language unless asked otherwise.
+2. BREVITY & SIMPLICITY: Always give short, simple, clear answers (2 to 4 short sentences or 3 brief bullet points max, under 80 words unless asked for detail). Avoid long essays.
+3. Mode: ${mode === 'competition' ? 'COMPETITION MODE' : 'LEARNING MODE'}. Never write or complete original poems for official competition submissions.
+4. Official facts only: ${officialContext || 'Souq Ukaz Impromptu Arabic Poetry Competition, Darul Huda Islamic University, Chemmad. Age 15-25. Stage 1 free poem on "على أنقاض العدالة" due Nov 30, 2026. Top 30 announced Dec 5, 2026. ₹50 fee for selected 30 finalists only. Final round Dec 20, 2026. Prizes ₹7001, ₹5001, ₹3001. Contacts: 8590409367, 90725 84470, arabicdept@dhiu.in.'}
+5. Note briefly that AI prosody/عروض feedback is approximate, not an authoritative ruling.`;
 
     let contents = [];
     if (action === 'evaluate') {
       contents = [{
         role: 'user',
         parts: [{
-          text: `Evaluate this PRACTICE Arabic poem on "${topic || 'Arabic Poetry'}" (${difficulty}). Give concise, encouraging feedback on: 1. Grammar (النحو), 2. Vocabulary (المفردات), 3. Poetic Imagery (الصورة الشعرية), 4. Rhyme (القافية), 5. Rhythm/Metre (الوزن — state it is approximate), 6. Creativity (الإبداع), plus 2 gentle tips.\n\n${poem.trim()}`
+          text: `Give brief, encouraging feedback (under 110 words) on this PRACTICE Arabic poem for "${topic || 'Arabic Poetry'}" (${difficulty}). Cover in short bullets: Grammar (النحو), Vocabulary (المفردات), Imagery (الصورة), Rhyme (القافية), Approximate Metre (الوزن), and 1 quick tip.\n\n${poem.trim()}`
         }]
       }];
     } else {
@@ -90,7 +91,7 @@ export default async function handler(req, res) {
       contents,
       generationConfig: {
         temperature: mode === 'competition' ? 0.3 : 0.7,
-        maxOutputTokens: 700
+        maxOutputTokens: 350
       }
     });
 
