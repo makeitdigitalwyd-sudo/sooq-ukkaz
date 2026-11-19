@@ -141,6 +141,34 @@
       animation: softGlow 2.8s ease-in-out infinite;
     }
 
+    .rafeeq-glaze {
+      position: relative;
+      overflow: hidden;
+      animation: rafeeqGlow 2.4s ease-in-out infinite;
+    }
+
+    .rafeeq-glaze::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 20%, rgba(251, 247, 238, 0.55) 50%, transparent 80%);
+      animation: glazeSweep 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glazeSweep {
+      0% { left: -120%; }
+      45%, 100% { left: 160%; }
+    }
+
+    @keyframes rafeeqGlow {
+      0%, 100% { box-shadow: 0 10px 28px rgba(39, 23, 15, 0.35), 0 0 0 0 rgba(201, 158, 68, 0.55); }
+      50% { box-shadow: 0 14px 34px rgba(39, 23, 15, 0.45), 0 0 0 10px rgba(201, 158, 68, 0); }
+    }
+
     @keyframes softGlow {
       0%, 100% { box-shadow: 0 0 0 0 rgba(201, 158, 68, 0.35); }
       50% { box-shadow: 0 0 0 8px rgba(201, 158, 68, 0); }
@@ -324,6 +352,22 @@
           <p>• سيتم إعلان <strong>30 متأهلاً</strong> للجولة النهائية في 5 ديسمبر، وعند التأهل تُدفع رسوم النهائي (50 روبية) عبر تبويب <strong>«التأهل والدفع»</strong>.</p>
           <p>• تعقد الجولة النهائية في <strong>20 ديسمبر 2026</strong> في حرم جامعة دار الهدى الإسلامية بتشماد.</p>
         </div>
+      </div>
+
+      <!-- Prominent Glazed Discovery Banner for رفيق الشاعر -->
+      <div class="no-print rafeeq-glaze manuscript-dark rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-vellum-50">
+        <div class="flex items-center gap-3 text-center sm:text-right">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-gold-400 bg-gold-400 text-ink-950 font-ruqaa text-2xl font-bold shadow-md">
+            ر
+          </div>
+          <div>
+            <p class="font-ruqaa text-lg sm:text-xl font-bold text-gold-300">✦ تعرّف على «رفيق الشاعر» — مساعدك الذكي</p>
+            <p class="text-xs text-vellum-100/85">تدرّب على قرض الشعر، تعلّم العروض والبلاغة، واكتشف المفردات بالعربية والإنجليزية والماليالامية.</p>
+          </div>
+        </div>
+        <button id="bannerOpenRafeeqBtn" type="button" class="shrink-0 rounded-full bg-gold-400 px-5 py-2.5 text-xs font-extrabold text-ink-950 shadow-md transition hover:bg-gold-300 sm:text-sm">
+          جرّب رفيق الشاعر الآن ✦
+        </button>
       </div>
 
       <!-- Stage 1 Form -->
@@ -725,29 +769,32 @@
     </div>
   </div>
 
-  <!-- Floating رفيق الشاعر (The Poet's Companion) Button -->
+  <!-- Floating رفيق الشاعر (The Poet's Companion) Button with Glaze -->
   <button
     id="openRafeeqBtn"
     type="button"
-    class="no-print fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full border-2 border-gold-400 bg-ink-900 px-4 py-3 text-gold-300 shadow-2xl transition hover:scale-105 hover:bg-ink-800"
+    class="no-print rafeeq-glaze fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-full border-2 border-gold-300 bg-ink-900 px-4 py-2.5 text-gold-300 transition hover:scale-105 hover:bg-ink-800"
   >
     <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400 text-ink-950 font-ruqaa text-lg font-bold">ر</span>
-    <span class="text-xs font-extrabold sm:text-sm">رفيق الشاعر</span>
+    <div class="text-right leading-tight">
+      <span class="block text-xs font-extrabold sm:text-sm">رفيق الشاعر ✦</span>
+      <span class="block text-[10px] text-vellum-100/80">مساعدك الشعري</span>
+    </div>
   </button>
 
   <!-- رفيق الشاعر (The Poet's Companion) Full Interactive Hub Modal -->
-  <div id="rafeeqModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-ink-950/80 p-2 sm:p-4 backdrop-blur-sm">
-    <div class="manuscript-card relative flex h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl">
+  <div id="rafeeqModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-ink-950/85 p-0 sm:p-4 backdrop-blur-sm">
+    <div class="manuscript-card relative flex h-[100dvh] w-full max-w-5xl flex-col overflow-hidden rounded-none sm:h-[90dvh] sm:rounded-3xl">
 
-      <!-- Modal Header -->
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold-400/40 bg-ink-900 px-4 py-3 text-vellum-50 sm:px-6">
-        <div class="flex items-center gap-3">
-          <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-gold-400 bg-gold-400/20 font-ruqaa text-2xl font-bold text-gold-300">
+      <!-- Modal Header (Compact on Mobile) -->
+      <div class="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-gold-400/40 bg-ink-900 px-3 py-2.5 text-vellum-50 sm:px-6 sm:py-3">
+        <div class="flex items-center gap-2.5">
+          <div class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-gold-400 bg-gold-400/20 font-ruqaa text-xl sm:text-2xl font-bold text-gold-300">
             ر
           </div>
           <div>
-            <h2 class="font-ruqaa text-lg font-bold text-gold-300 sm:text-xl">رفيق الشاعر • The Poet's Companion</h2>
-            <p class="text-[11px] text-vellum-200/80">مساعد ذكي لتعلّم الشعر العربي والاستعداد لمسابقة سوق عكاظ (العربية • English • മലയാളം)</p>
+            <h2 class="font-ruqaa text-base font-bold text-gold-300 sm:text-xl">رفيق الشاعر</h2>
+            <p class="hidden sm:block text-[11px] text-vellum-200/80">مساعد ذكي لتعلّم الشعر العربي والاستعداد لمسابقة سوق عكاظ (العربية • English • മലയാളം)</p>
           </div>
         </div>
 
@@ -781,26 +828,26 @@
       </div>
 
       <!-- Modal Content Body -->
-      <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+      <div class="flex-1 min-h-0 overflow-y-auto p-3 sm:p-6 flex flex-col">
 
         <!-- 1. ASK AI ASSISTANT -->
-        <div id="rtab-chat" class="rtab-panel flex h-full flex-col gap-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex flex-wrap gap-1.5">
-              <button type="button" class="suggested-q rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100">ما شروط مسابقة سوق عكاظ؟</button>
-              <button type="button" class="suggested-q rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100" dir="ltr">Explain البحر الكامل simply</button>
-              <button type="button" class="suggested-q rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100" dir="ltr">അറബി കവിതയിലെ التشبيه എന്താണ്?</button>
+        <div id="rtab-chat" class="rtab-panel flex flex-1 min-h-0 flex-col gap-2.5">
+          <div class="flex shrink-0 items-center justify-between gap-2">
+            <div class="flex flex-1 items-center gap-1.5 overflow-x-auto pb-1">
+              <button type="button" class="suggested-q shrink-0 rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100">ما شروط المسابقة؟</button>
+              <button type="button" class="suggested-q shrink-0 rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100" dir="ltr">Explain البحر الكامل</button>
+              <button type="button" class="suggested-q shrink-0 rounded-full border border-gold-400/45 bg-white px-3 py-1 text-[11px] font-semibold text-ink-800 hover:bg-vellum-100" dir="ltr">التشبيه എന്താണ്?</button>
             </div>
-            <button id="clearChatBtn" type="button" class="rounded-lg border border-oasis-crimson/35 px-2.5 py-1 text-[11px] font-bold text-oasis-crimson hover:bg-oasis-crimson hover:text-white">
-              مسح المحادثة
+            <button id="clearChatBtn" type="button" class="shrink-0 rounded-lg border border-oasis-crimson/35 px-2.5 py-1 text-[11px] font-bold text-oasis-crimson hover:bg-oasis-crimson hover:text-white">
+              مسح
             </button>
           </div>
 
-          <div id="chatMessagesBox" class="flex-1 min-h-[260px] space-y-3 overflow-y-auto rounded-2xl border border-gold-400/35 bg-white/80 p-4"></div>
+          <div id="chatMessagesBox" class="flex-1 min-h-0 space-y-2.5 overflow-y-auto rounded-2xl border border-gold-400/35 bg-white/85 p-3 sm:p-4"></div>
 
-          <form id="chatForm" class="flex gap-2">
-            <input id="chatInput" type="text" dir="auto" required placeholder="اسأل بالعربية أو الإنجليزية أو الماليالامية..." class="input-manuscript flex-1 rounded-xl px-4 py-3 text-sm" />
-            <button id="chatSendBtn" type="submit" class="rounded-xl bg-ink-900 px-5 py-3 text-sm font-bold text-gold-300 hover:bg-ink-800 disabled:opacity-50">
+          <form id="chatForm" class="flex shrink-0 items-center gap-2 pt-1">
+            <input id="chatInput" type="text" dir="auto" required placeholder="اسأل بالعربية أو English أو മലയാളം..." class="input-manuscript flex-1 min-w-0 rounded-xl px-3.5 py-2.5 text-sm" />
+            <button id="chatSendBtn" type="submit" class="flex h-10 min-w-[74px] items-center justify-center rounded-xl bg-ink-900 px-4 text-sm font-bold text-gold-300 transition hover:bg-ink-800 disabled:bg-ink-800 disabled:text-gold-300 disabled:opacity-90">
               إرسال
             </button>
           </form>
@@ -2142,6 +2189,14 @@
     ];
 
     // Open / Close Modal
+    const bannerOpenRafeeqBtn = document.getElementById('bannerOpenRafeeqBtn');
+    if (bannerOpenRafeeqBtn) {
+      bannerOpenRafeeqBtn.addEventListener('click', () => openRafeeqBtn.click());
+    }
+    chatInput.addEventListener('focus', () => {
+      setTimeout(() => { chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight; }, 250);
+    });
+
     openRafeeqBtn.addEventListener('click', () => {
       if (!chatbotSettings.enabled) {
         showToast('تم إيقاف رفيق الشاعر مؤقتاً من قِبل الإدارة');
@@ -2221,12 +2276,14 @@
       return data.reply;
     }
 
+    const SPINNER_SVG = '<svg class="h-5 w-5 animate-spin text-gold-300" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-85" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>';
+
     async function sendChatMessage(text) {
       if (!text.trim()) return;
       appendChatBubble('user', text);
       chatInput.value = '';
       chatSendBtn.disabled = true;
-      chatSendBtn.textContent = '...';
+      chatSendBtn.innerHTML = SPINNER_SVG;
 
       // Save user message to Firestore
       if (isFirebaseConfigured && db) {
@@ -2350,7 +2407,7 @@
         return;
       }
       evaluatePoemBtn.disabled = true;
-      evaluatePoemBtn.textContent = 'جارٍ التقييم الأدبي...';
+      evaluatePoemBtn.innerHTML = '<span class="inline-flex items-center gap-2">' + SPINNER_SVG + '<span>جارٍ التقييم...</span></span>';
       practiceFeedbackBox.classList.add('hidden');
 
       try {
